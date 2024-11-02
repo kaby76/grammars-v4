@@ -3185,12 +3185,7 @@ from_clause
     ;
 
 from_list
-    : non_ansi_join
-    | table_ref (COMMA table_ref)*
-    ;
-
-non_ansi_join
-    : table_ref (COMMA table_ref)+
+    : table_ref (COMMA table_ref)*
     ;
 
 table_ref
