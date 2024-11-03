@@ -120,4 +120,12 @@ public abstract class PostgreSQLParserBase : Parser
         parser.AddErrorListener(listener_parser);
         return parser;
     }
+
+    // Make sure to only allow these as unary, postfix operators.
+    public bool OnlyAcceptableOps()
+    {
+        var c = ((CommonTokenStream)this.InputStream).LT(1);
+        var text = c.Text;
+        return text == "!" || text == "!!";
+    }
 }
