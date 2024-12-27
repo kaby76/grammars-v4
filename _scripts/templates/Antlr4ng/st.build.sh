@@ -12,13 +12,9 @@ if [ -f transformGrammar.py ]; then python3 transformGrammar.py ; fi
 # parser and lexer.
 version=`grep antlr4 package.json | awk '{print $2}' | tr -d '"' | tr -d ',' | tr -d '\r' | tr -d '\n'`
 
-w=`pwd`
-pushd ~/antlr-ng
 <tool_grammar_tuples:{x |
-#node --no-warnings --loader ts-node/esm cli/runner.ts -encoding <antlr_encoding> -Dlanguage=TypeScript <x.AntlrArgs> <antlr_tool_args:{y | <y> } > $w/<x.GrammarFileName>
-tsx cli/runner.ts -Dlanguage=TypeScript <x.AntlrArgs> <antlr_tool_args:{y | <y> } > $w/<x.GrammarFileName>
+tsx --tsconfig ~/antlr-ng/tsconfig.json ~/antlr-ng/cli/runner.ts -Dlanguage=TypeScript <x.AntlrArgs> <antlr_tool_args:{y | <y> } > <x.GrammarFileName>
 } >
-popd
 
 tsc -p tsconfig.json --pretty
 exit 0
