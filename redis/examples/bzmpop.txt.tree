@@ -1,0 +1,1 @@
+(root (commands (command (sortedSetCommand (bzmpopCommand BZMPOP 1 1 (sortedSetKeyName (identifier test)) (minMaxClause MIN))))) <EOF>)

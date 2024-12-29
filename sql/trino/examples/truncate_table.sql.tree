@@ -1,0 +1,1 @@
+(parse (statements (singleStatement (statement TRUNCATE TABLE (qualifiedName (identifier a))) ;)) (statements (singleStatement (statement TRUNCATE TABLE (qualifiedName (identifier a) . (identifier b))) ;)) (statements (singleStatement (statement TRUNCATE TABLE (qualifiedName (identifier a) . (identifier b) . (identifier c))) ;)) <EOF>)

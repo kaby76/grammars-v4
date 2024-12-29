@@ -1,0 +1,1 @@
+(sqlScript (unitStatement (renameTable RENAME TABLE (identifier (anyName own) . (anyName old_table)) TO (identifier (anyName newitems))) ;) <EOF>)

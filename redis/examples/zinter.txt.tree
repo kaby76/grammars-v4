@@ -1,0 +1,1 @@
+(root (commands (command (sortedSetCommand (zinterCommand ZINTER 1 (sortedSetKeyName (identifier test)))))) <EOF>)

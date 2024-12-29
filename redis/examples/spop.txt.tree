@@ -1,0 +1,1 @@
+(root (commands (command (setCommand (spopCommand SPOP (setKeyName (identifier test)))))) <EOF>)

@@ -1,0 +1,1 @@
+(root (commands (command (stringCommand (setRangeCommand SETRANGE (stringKeyName (identifier test)) 1 (identifier test))))) <EOF>)

@@ -1,0 +1,1 @@
+(parse (block (atom (variable $ (id customer) .)) (atom (directive (custom_directive Address))) (atom \n) (atom (variable $ (id purchase) .)) (atom (directive (custom_directive Total)))) <EOF>)

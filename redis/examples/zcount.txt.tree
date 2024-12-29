@@ -1,0 +1,1 @@
+(root (commands (command (sortedSetCommand (zcountCommand ZCOUNT (sortedSetKeyName (identifier test)) (decimalScore -1) (decimalScore 1))))) <EOF>)

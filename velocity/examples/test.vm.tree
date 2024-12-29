@@ -1,0 +1,1 @@
+(parse (block (atom (directive (set_directive set( (expression (variable $q)) = (expression 10) )))) (atom \n) (atom (directive (set_directive set( (expression (variable $q)) = (expression (expression (variable $q)) - (expression 1)) )))) (atom \n) (atom (variable $ (id q)))) <EOF>)

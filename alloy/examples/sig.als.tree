@@ -1,0 +1,1 @@
+(alloyModule (paragraph (sigDecl sig (name FSObject) { (decl (name parent) : (expr (unOp (mult lone)) (expr (qualName (name Dir))))) })) <EOF>)

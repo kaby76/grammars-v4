@@ -1,0 +1,1 @@
+(root (commands (command (listCommand (lposCommand LPOS (listKeyName (identifier test)) (identifier key) (rankClause RANK (decimal 1)))))) <EOF>)

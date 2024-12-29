@@ -1,0 +1,1 @@
+(prog (symbol (iterate ( (symbol (atom λ)) (symbol (atom R)) (symbol (atom λ)) (symbol (atom R)) (symbol (atom λ)) (symbol (atom R)) (symbol (atom R)) (symbol (atom λ)) (symbol (atom R)) (symbol (atom λ)) (symbol (atom R)) (symbol (atom λ)) (symbol (atom R)) (symbol (atom λ)) (symbol (atom R)) (symbol (atom λ)) ))) <EOF>)

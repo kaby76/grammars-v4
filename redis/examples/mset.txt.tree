@@ -1,0 +1,1 @@
+(root (commands (command (stringCommand (mSetCommand MSET (stringKeyName (identifier test1)) (identifier test2))))) <EOF>)

@@ -1,0 +1,1 @@
+(molecule (part_ (structure (symbol (element C))) (structure (symbol (element Cl)) (count 4))) <EOF>)

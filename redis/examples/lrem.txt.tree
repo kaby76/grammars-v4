@@ -1,0 +1,1 @@
+(root (commands (command (listCommand (lremCommand LREM (listKeyName (identifier test)) (decimal -1) (identifier key))))) <EOF>)

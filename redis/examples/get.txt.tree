@@ -1,0 +1,1 @@
+(root (commands (command (stringCommand (getCommand GET (stringKeyName (identifier test)))))) <EOF>)

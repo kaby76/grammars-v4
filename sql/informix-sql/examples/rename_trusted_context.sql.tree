@@ -1,0 +1,1 @@
+(sqlScript (unitStatement (renameTrustedContext RENAME TRUSTED CONTEXT (identifier (anyName cntx1)) TO (identifier (anyName cntx2))) ;) <EOF>)

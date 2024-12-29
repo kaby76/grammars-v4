@@ -1,0 +1,1 @@
+(root (commands (command (setCommand (sdiffCommand SDIFF (setKeyName (identifier test)))))) <EOF>)

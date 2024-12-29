@@ -1,0 +1,1 @@
+(start_ (prods (prod (xlhs children) (assign (ws  ) ::=) (xrhs (xalt (xelem (ws  ) " "))))) <EOF>)

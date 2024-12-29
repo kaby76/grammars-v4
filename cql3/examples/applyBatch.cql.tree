@@ -1,0 +1,1 @@
+(root (cqls (cql (applyBatch (kwApply APPLY) (kwBatch BATCH))) (statementSeparator ;)) <EOF>)

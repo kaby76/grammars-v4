@@ -1,0 +1,1 @@
+(root (commands (command (commonCommand (persistCommand PERSIST (keyName (identifier test)))))) <EOF>)

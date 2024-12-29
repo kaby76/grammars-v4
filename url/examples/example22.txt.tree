@@ -1,0 +1,1 @@
+(url (uri (scheme (string http)) :// (host (hostname [ (v6host :: (string 1)) ])) : (port 80) / \n) <EOF>)

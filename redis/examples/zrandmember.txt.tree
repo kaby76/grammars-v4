@@ -1,0 +1,1 @@
+(root (commands (command (sortedSetCommand (zrandmemberCommand ZRANDMEMBER (sortedSetKeyName (identifier test)) (decimal 1) WITHSCORES)))) <EOF>)

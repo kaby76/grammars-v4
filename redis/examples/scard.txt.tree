@@ -1,0 +1,1 @@
+(root (commands (command (setCommand (scardCommand SCARD (setKeyName (identifier test)))))) <EOF>)

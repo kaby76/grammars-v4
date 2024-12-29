@@ -1,0 +1,1 @@
+(root (commands (command (stringCommand (incrementCommand INCR (stringKeyName (identifier test)))))) <EOF>)

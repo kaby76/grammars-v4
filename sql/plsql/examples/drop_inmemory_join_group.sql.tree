@@ -1,0 +1,1 @@
+(sql_script (unit_statement (drop_inmemory_join_group DROP INMEMORY JOIN GROUP (id_expression (regular_id prod_id1)))) ; <EOF>)

@@ -1,0 +1,1 @@
+(root (commands (command (commonCommand (expireAtCommand EXPIREAT (keyName (identifier test)) (decimal 1) (expireOptions NX))))) <EOF>)

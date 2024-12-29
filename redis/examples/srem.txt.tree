@@ -1,0 +1,1 @@
+(root (commands (command (setCommand (sremCommand SREM (setKeyName (identifier test)) (identifier 1))))) <EOF>)

@@ -1,0 +1,1 @@
+(root (commands (command (stringCommand (decrementByCommand DECRBY (stringKeyName (identifier test)) (decimal 1))))) <EOF>)

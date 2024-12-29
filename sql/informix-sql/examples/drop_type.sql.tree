@@ -1,0 +1,1 @@
+(sqlScript (unitStatement (dropType DROP TYPE (identifier (anyName tt)) RESTRICT) ;) (unitStatement (dropType DROP TYPE (identifier (anyName test) . (anyName tt)) RESTRICT) ;) (unitStatement (dropType DROP TYPE IF EXISTS (identifier (anyName tt)) RESTRICT) ;) <EOF>)

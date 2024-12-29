@@ -1,0 +1,1 @@
+(root (commands (command (hashCommand (hkeysCommand HKEYS (hashKeyName (identifier test)))))) <EOF>)

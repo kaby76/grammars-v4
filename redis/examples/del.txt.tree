@@ -1,0 +1,1 @@
+(root (commands (command (commonCommand (deleteCommand DEL (keyName (identifier test1)) (keyName (identifier test2)))))) <EOF>)

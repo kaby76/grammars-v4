@@ -1,0 +1,1 @@
+(stylesheet (statement (ruleset (selectorGroup (selector (selectorSequence (className . (identifier text-truncate))))) (block { (statement (includeDeclaration @include (functionCall (identifier text-truncate) ( parameters )) ;)) }))) <EOF>)

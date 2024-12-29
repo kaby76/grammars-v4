@@ -1,0 +1,1 @@
+(grammarSpec (grammarDecl (grammarType lexer grammar) (identifier LexerElementLabel) ;) (rules (ruleSpec (lexerRuleSpec Token : (lexerRuleBlock (lexerAltList (lexerAlt lexerElements))) <missing SEMI>)) (ruleSpec (parserRuleSpec var = 'token' ;))) <EOF>)

@@ -1,0 +1,1 @@
+(program (declarationOrStatementInMainProgram (statement (putStatement put (putItem (expn (explicitConstant "Hello, world!")))))) <EOF>)

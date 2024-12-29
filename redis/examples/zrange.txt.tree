@@ -1,0 +1,1 @@
+(root (commands (command (sortedSetCommand (zrangeCommand ZRANGE (sortedSetKeyName (identifier test)) (lexicalScore (identifier lex1)) (lexicalScore (identifier lex2)))))) <EOF>)

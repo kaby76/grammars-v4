@@ -1,0 +1,1 @@
+(start_ (expression (vectorOperation (name find) ( "..." ) (metricsAggregation | (name label) (parameterList ( (parameter (literal "This is output stream %d")) ))))) <EOF>)

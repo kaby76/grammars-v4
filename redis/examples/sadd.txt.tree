@@ -1,0 +1,1 @@
+(root (commands (command (setCommand (saddCommand SADD (setKeyName (identifier test)) (identifier key1) (identifier key2))))) <EOF>)

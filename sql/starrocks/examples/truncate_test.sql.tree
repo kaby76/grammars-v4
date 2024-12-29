@@ -1,0 +1,1 @@
+(sqlStatements (singleStatement (statement (truncateTableStatement TRUNCATE TABLE (qualifiedName (identifier example_db) . (identifier tbl)))) ;) <EOF>)

@@ -1,0 +1,1 @@
+(topLevelQuery (query (disjQuery (conjQuery (modClause (modifier NOT) (clause (term (quotedTerm "jakarta apache"))))))) <EOF>)

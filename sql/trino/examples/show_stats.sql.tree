@@ -1,0 +1,1 @@
+(parse (statements (singleStatement (statement SHOW STATS FOR (qualifiedName (identifier a))) ;)) <EOF>)

@@ -1,0 +1,1 @@
+(parse (statements (singleStatement (statement SHOW CATALOGS) ;)) (statements (singleStatement (statement SHOW CATALOGS LIKE (string_ '%')) ;)) (statements (singleStatement (statement SHOW CATALOGS LIKE (string_ '%$_%') ESCAPE (string_ '$')) ;)) <EOF>)

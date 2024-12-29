@@ -1,0 +1,1 @@
+(aterm_ (term_ (placeholder < (term_ (afun int)) >)) <EOF>)

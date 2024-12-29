@@ -1,0 +1,1 @@
+(root (commands (command (hashCommand (hscanCommand HSCAN (hashKeyName (identifier test)) (decimal 0) (matchClause MATCH (keyPattern (identifier *))) (countClause COUNT 1))))) <EOF>)

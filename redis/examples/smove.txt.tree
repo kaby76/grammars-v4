@@ -1,0 +1,1 @@
+(root (commands (command (setCommand (smoveCommand SMOVE (setKeyName (identifier test1)) (setKeyName (identifier test2)))))) <EOF>)
