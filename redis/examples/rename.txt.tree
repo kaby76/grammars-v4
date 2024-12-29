@@ -1,0 +1,1 @@
+(root (commands (command (commonCommand (renameCommand RENAME (keyName (identifier test1)) (identifier test2))))) <EOF>)

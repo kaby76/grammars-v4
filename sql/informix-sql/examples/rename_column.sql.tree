@@ -1,0 +1,1 @@
+(sqlScript (unitStatement (renameColumn RENAME COLUMN (identifier (anyName customer) . (anyName customer_num)) TO (identifier (anyName c_num))) ;) <EOF>)

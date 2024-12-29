@@ -1,0 +1,1 @@
+(parse (statements (singleStatement (statement DESCRIBE INPUT (identifier myquery)) ;)) <EOF>)

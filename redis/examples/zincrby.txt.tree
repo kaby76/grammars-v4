@@ -1,0 +1,1 @@
+(root (commands (command (sortedSetCommand (zincrbyCommand ZINCRBY (sortedSetKeyName (identifier test)) (decimal 1) (identifier key))))) <EOF>)

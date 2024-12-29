@@ -1,0 +1,1 @@
+(root (commands (command (listCommand (lindexCommand LINDEX (listKeyName (identifier test)) (decimal 1))))) <EOF>)

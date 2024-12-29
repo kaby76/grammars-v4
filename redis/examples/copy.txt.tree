@@ -1,0 +1,1 @@
+(root (commands (command (commonCommand (copyCommand COPY (keyName (identifier test1)) (identifier test2) (dbClause DB (databaseName 1)) REPLACE)))) <EOF>)

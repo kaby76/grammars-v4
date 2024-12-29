@@ -1,0 +1,1 @@
+(root (commands (command (listCommand (lpushCommand LPUSH (listKeyName (identifier test)) (identifier key))))) <EOF>)

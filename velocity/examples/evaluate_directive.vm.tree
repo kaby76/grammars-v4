@@ -1,0 +1,1 @@
+(parse (block (atom (directive (evaluate_directive evaluate( (expression (variable $dynamicsource)) )))) (atom \n)) <EOF>)

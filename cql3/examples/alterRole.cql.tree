@@ -1,0 +1,1 @@
+(root (cqls (cql (alterRole (kwAlter ALTER) (kwRole ROLE) (role coach) (roleWith (kwWith WITH) (roleWithOptions (kwPassword PASSWORD) = (stringLiteral 'bestTeam'))))) (statementSeparator ;)) <EOF>)

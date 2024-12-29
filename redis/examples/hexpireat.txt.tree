@@ -1,0 +1,1 @@
+(root (commands (command (hashCommand (hexpireAtCommand HEXPIREAT (hashKeyName (identifier test)) (decimal 1) (fieldsClause FIELDS 1 (identifier key1)))))) <EOF>)

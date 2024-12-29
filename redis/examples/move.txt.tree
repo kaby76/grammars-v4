@@ -1,0 +1,1 @@
+(root (commands (command (commonCommand (moveCommand MOVE (keyName (identifier test)) (databaseName 1))))) <EOF>)

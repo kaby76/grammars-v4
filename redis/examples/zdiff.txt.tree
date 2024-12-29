@@ -1,0 +1,1 @@
+(root (commands (command (sortedSetCommand (zdiffCommand ZDIFF 1 (sortedSetKeyName (identifier test1)) (sortedSetKeyName (identifier test2)))))) <EOF>)

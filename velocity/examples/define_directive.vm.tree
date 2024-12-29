@@ -1,0 +1,1 @@
+(parse (block (atom (directive (define_directive define( (expression (variable $block)) ) (block (atom H) (atom e) (atom l) (atom l) (atom o) (atom  ) (atom (variable $ (id who)))) (end end)))) (atom \n)) <EOF>)

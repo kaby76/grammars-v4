@@ -1,0 +1,1 @@
+(root (commands (command (hashCommand (hsetCommand HSET (hashKeyName (identifier test)) (identifier key1) (identifier val1))))) <EOF>)

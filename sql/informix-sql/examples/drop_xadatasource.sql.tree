@@ -1,0 +1,1 @@
+(sqlScript (unitStatement (dropXadatasource DROP XADATASOURCE (identifier (anyName informix) . (anyName NewYork)) RESTRICT) ;) (unitStatement (dropXadatasource DROP XADATASOURCE IF EXISTS (identifier (anyName informix) . (anyName NewYork)) RESTRICT) ;) <EOF>)

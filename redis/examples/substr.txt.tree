@@ -1,0 +1,1 @@
+(root (commands (command (stringCommand (substringCommand SUBSTR (stringKeyName (identifier test)) (decimal -1) (decimal -3))))) <EOF>)

@@ -1,0 +1,1 @@
+(file_ (proposition F (proposition (proposition p) → (proposition F (proposition q)))) <EOF>)

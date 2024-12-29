@@ -1,0 +1,1 @@
+(root (commands (command (setCommand (sismemberCommand SISMEMBER (setKeyName (identifier test)) (identifier key))))) <EOF>)

@@ -1,0 +1,1 @@
+(sqlStatements (singleStatement (statement (alterLoadStatement ALTER LOAD FOR (qualifiedName (identifier test_db)) . (identifier label1) (jobProperties (properties PROPERTIES ( (property (string_ 'priority') = (string_ 'HIGHEST')) ))))) ;) <EOF>)

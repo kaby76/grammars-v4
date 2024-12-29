@@ -1,0 +1,1 @@
+(sqlScript (unitStatement (setAutofree SET AUTOFREE) ;) (unitStatement (setAutofree SET AUTOFREE ENABLED) ;) (unitStatement (setAutofree SET AUTOFREE DISABLED) ;) (unitStatement (setAutofree SET AUTOFREE DISABLED FOR (identifier (anyName idd))) ;) <EOF>)

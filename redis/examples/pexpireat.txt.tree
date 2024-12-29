@@ -1,0 +1,1 @@
+(root (commands (command (commonCommand (pExpireTimeCommand PEXPIRETIME (keyName (identifier test)))))) <EOF>)

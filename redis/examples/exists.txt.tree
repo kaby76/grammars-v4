@@ -1,0 +1,1 @@
+(root (commands (command (commonCommand (existsCommand EXISTS (keyName (identifier test)))))) <EOF>)

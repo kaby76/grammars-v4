@@ -1,0 +1,1 @@
+(sqlScript (unitStatement (dropUser DROP USER (anyName bill)) ;) <EOF>)

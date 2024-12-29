@@ -1,0 +1,1 @@
+(root (commands (command (sortedSetCommand (zremCommand ZREM (sortedSetKeyName (identifier test)) (identifier member))))) <EOF>)

@@ -1,0 +1,1 @@
+(root (commands (command (listCommand (lmoveCommand LMOVE (listKeyName (identifier test1)) (listKeyName (identifier test2)) (leftOrRightClause LEFT) (leftOrRightClause RIGHT))))) <EOF>)

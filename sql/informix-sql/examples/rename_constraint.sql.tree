@@ -1,0 +1,1 @@
+(sqlScript (unitStatement (renameConstraint RENAME CONSTRAINT (identifier (anyName own) . (anyName oldct)) TO (identifier (anyName nwct))) ;) <EOF>)

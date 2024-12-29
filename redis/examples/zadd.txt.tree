@@ -1,0 +1,1 @@
+(root (commands (command (sortedSetCommand (zaddCommand ZADD (sortedSetKeyName (identifier test)) (scoreMemberClause (decimal 1) (identifier key1)))))) <EOF>)
