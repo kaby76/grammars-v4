@@ -1,5 +1,7 @@
 # Generated from trgen <version>
 
+if (Test-Path .venv\Scripts\python3.exe) { $env:PATH = "$PWD\.venv\Scripts;$env:PATH" }
+
 $workingDirectory = Get-Location
 $filePath = "$workingDirectory/tests.txt"
 

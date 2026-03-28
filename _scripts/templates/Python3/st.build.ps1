@@ -26,5 +26,5 @@ if($compile_exit_code -ne 0){
 }>
 
 $(& python3 -m venv .venv ) | Write-Host
-$(& .venv/bin/pip install -r requirements.txt ; $compile_exit_code = $LASTEXITCODE ) | Write-Host
+$(& <if(test.IsWindows)>.venv\Scripts\pip<else>.venv/bin/pip<endif> install -r requirements.txt ; $compile_exit_code = $LASTEXITCODE ) | Write-Host
 exit $compile_exit_code
