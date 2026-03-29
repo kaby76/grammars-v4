@@ -14,6 +14,8 @@ $version = (Select-String -Path "requirements.txt" -Pattern "antlr4" | ForEach-O
 python3 -m venv .venv
 <if(test.IsWindows)>.venv\Scripts\Activate.ps1<else>.venv/bin/Activate.ps1<endif>
 
+<if(test.IsWindows)>.venv\Scripts\pip<else>.venv/bin/pip<endif> install -r requirements.txt
+
 <if(antlrng_tool)>
 npm init -y
 npm i antlr-ng
