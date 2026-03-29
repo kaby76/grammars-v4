@@ -1,6 +1,6 @@
 # Generated from trgen <version>
 
-if (Test-Path .venv\Scripts\python3.exe) { $env:PATH = "$PWD\.venv\Scripts;$env:PATH" }
+<if(test.IsWindows)>.venv\Scripts\Activate.ps1<else>.venv/bin/Activate.ps1<endif>
 
 $workingDirectory = Get-Location
 $filePath = "$workingDirectory/tests.txt"
@@ -56,11 +56,11 @@ git clean -f ..\\<example_dir_unix>
 # Parse all input files.
 <if(individual_parsing)>
 # Individual parsing.
-Get-Content "$filePath" | ForEach-Object { dotnet trwdog python3 Test.py -q -tee -tree $_ *>> parse.txt }
+Get-Content "$filePath" | ForEach-Object { dotnet trwdog python Test.py -q -tee -tree $_ *>> parse.txt }
 $status = $LASTEXITCODE
 <else>
 # Group parsing.
-get-content "$filePath" | dotnet trwdog python3 Test.py -q -x -tee -tree *> parse.txt
+get-content "$filePath" | dotnet trwdog python Test.py -q -x -tee -tree *> parse.txt
 $status = $LASTEXITCODE
 <endif>
 
