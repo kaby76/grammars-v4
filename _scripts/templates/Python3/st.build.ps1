@@ -1,4 +1,6 @@
 # Generated from trgen <version>
+Get-Content build.ps1 | Write-Host
+
 if (Test-Path -Path transformGrammar.py -PathType Leaf) {
     $(& python3 transformGrammar.py ) 2>&1 | Write-Host
 }
@@ -25,9 +27,5 @@ $(& tsx $HOME/antlr-ng/cli/runner.ts --encoding <antlr_encoding> -Dlanguage=Pyth
 <else>
 $(& antlr4 -v $version <x.GrammarFileNameTarget> -encoding <antlr_encoding> -Dlanguage=Python3 <x.AntlrArgs> <antlr_tool_args:{y | <y> } > ; $compile_exit_code = $LASTEXITCODE) | Write-Host
 <endif>
-if($compile_exit_code -ne 0){
-    exit $compile_exit_code
-\}
-}>
 
 exit $compile_exit_code
