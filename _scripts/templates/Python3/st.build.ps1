@@ -12,15 +12,23 @@ if (Test-Path -Path transformGrammar.py -PathType Leaf) {
 $version = (Select-String -Path "requirements.txt" -Pattern "antlr4" | ForEach-Object {$_.Line.Split("=")[2]}) -replace '"|,|\r|\n'
 
 python3 -m venv .venv
-<if(test.IsWindows)>.venv\Scripts\Activate.ps1<else>.venv/bin/Activate.ps1<endif>
-
-<if(test.IsWindows)>.venv\Scripts\pip<else>.venv/bin/pip<endif> install -r requirements.txt
+if (Test-Path -Path .\.venv\Scripts ) {
+    .venv\Scripts\Activate.ps1
+    .venv\Scripts\pip install -r requirements.txt
+} elseif (Test-Path -Path .\.venv\bin ) {
+    .venv\bin\activate
+    .venv\bin\pip install -r requirements.txt
+}
 
 <if(antlrng_tool)>
 npm init -y
 npm i antlr-ng
 <else>
-<if(test.IsWindows)>.venv\Scripts\pip<else>.venv/bin/pip<endif> install antlr4-tools
+if (Test-Path -Path .\.venv\Scripts ) {
+    .venv\Scripts\pip install antlr4-tools
+} elseif (Test-Path -Path .\.venv\bin ) {
+    .venv\bin\pip install antlr4-tools
+}
 <endif>
 
 <tool_grammar_tuples:{x |

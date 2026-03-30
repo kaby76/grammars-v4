@@ -1,2 +1,6 @@
-if (Test-Path .venv\Scripts\python3.exe) { $env:PATH = "$PWD\.venv\Scripts;$env:PATH" }
-python3 Test.py $args
+if (Test-Path -Path .\.venv\Scripts ) {
+    .venv\Scripts\Activate.ps1
+} elseif (Test-Path -Path .\.venv\bin ) {
+    .venv\bin\activate
+}
+python Test.py $args
