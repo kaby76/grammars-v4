@@ -18,6 +18,12 @@ if (Test-Path -Path .\.venv\Scripts ) {
 } elseif (Test-Path -Path .\.venv\bin ) {
     .venv\bin\activate
     .venv\bin\pip install -r requirements.txt
+} elseif (Test-Path -Path ./.venv/Scripts ) {
+    .venv/Scripts/Activate.ps1
+    .venv/Scripts/pip install -r requirements.txt
+} elseif (Test-Path -Path ./.venv/bin ) {
+    .venv/bin/activate
+    .venv/bin/pip install -r requirements.txt
 }
 
 <if(antlrng_tool)>
@@ -28,6 +34,10 @@ if (Test-Path -Path .\.venv\Scripts ) {
     .venv\Scripts\pip install antlr4-tools
 } elseif (Test-Path -Path .\.venv\bin ) {
     .venv\bin\pip install antlr4-tools
+} elseif (Test-Path -Path ./.venv/Scripts ) {
+    .venv/Scripts/pip install antlr4-tools
+} elseif (Test-Path -Path ./.venv/bin ) {
+    .venv/bin/pip install antlr4-tools
 }
 <endif>
 
