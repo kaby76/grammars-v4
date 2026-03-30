@@ -1,6 +1,2 @@
-if (Test-Path -Path .\.venv\Scripts ) {
-    .venv\Scripts\Activate.ps1
-} elseif (Test-Path -Path .\.venv\bin ) {
-    .venv\bin\activate
-}
+<if(test.IsWindows)>.venv\Scripts\Activate.ps1<else>.venv/bin/Activate.ps1<endif>
 python Test.py $args
