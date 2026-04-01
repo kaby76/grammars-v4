@@ -89,7 +89,7 @@ export default class CSharpParserBase extends antlr4.Parser {
     // -------------------------------------------------------------------------
 
     _insertNode(currentctx, contextTypeName) {
-	return;
+    return;
         const CtxCls = this.constructor[contextTypeName];
         if (!CtxCls) return;
         const inserted = new CtxCls(currentctx, currentctx.invokingState);
@@ -354,6 +354,15 @@ export default class CSharpParserBase extends antlr4.Parser {
         const tok = this._input.LT(1);
         return tok !== null && tok.type === CSharpLexer.KW_REF;
     }
+
+    // Gates comma-separated declarators: false when type is 'var' (only one declarator allowed).
+    IsLocalVariableDeclaration() {
+        const local_var_decl = this._ctx;
+        if (!(local_var_decl instanceof CSharpParser.Local_variable_declarationContext)) return true;
+        const local_variable_type = local_var_decl.local_variable_type();
+        if (local_variable_type == null) return true;
+        return local_variable_type.getText() !== "var";
+    }
 }
 
 // =============================================================================
@@ -556,14 +565,5 @@ class CSharpSymbolTable {
             'IEqualityComparer','IComparer','EqualityComparer','Comparer',
             'ConcurrentDictionary','ConcurrentQueue','ConcurrentStack','ConcurrentBag',
         ]) this._knownTypeNames.add(t);
-    }
-
-    // Gates comma-separated declarators: false when type is 'var' (only one declarator allowed).
-    IsLocalVariableDeclaration() {
-        const local_var_decl = this._ctx;
-        if (!(local_var_decl instanceof CSharpParser.Local_variable_declarationContext)) return true;
-        const local_variable_type = local_var_decl.local_variable_type();
-        if (local_variable_type == null) return true;
-        return local_variable_type.getText() !== "var";
     }
 }
