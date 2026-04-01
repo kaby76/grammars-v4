@@ -974,10 +974,13 @@ declaration_expression
     : local_variable_type identifier
     ;
 
-local_variable_type
-    : type_
-    | 'var'
-    ;
+// MOVED: local_variable_type relocated to §13.6.2 block and reordered ('var' first).
+// See definition below near local_variable_declaration.
+// Original:
+//   local_variable_type
+//       : type_
+//       | 'var'
+//       ;
 
 // Source: §12.20 Conditional operator
 conditional_expression
@@ -1204,36 +1207,45 @@ declaration_statement
     ;
 
 // Source: §13.6.2.1 General
+// CHANGED: replaced three-way predicated decision with unified v7-style form.
+// 'var' as a terminal resolves the implicit/explicit decision at LT(1);
+// ref_kind? prefix is token-distinguishable at LT(1)=ref.
+// Drops the implicit/explicit distinction from the parse tree (deferred to semantics).
+// Original:
+//   local_variable_declaration
+//       : {this.IsImplicitlyTypedLocalVariable()}? implicitly_typed_local_variable_declaration
+//       | {this.IsExplicitlyTypedLocalVariable()}? explicitly_typed_local_variable_declaration
+//       | {this.IsExplicitlyTypedRefLocalVariable()}? explicitly_typed_ref_local_variable_declaration
+//       ;
 local_variable_declaration
-    : {this.IsImplicitlyTypedLocalVariable()}? implicitly_typed_local_variable_declaration
-    | {this.IsExplicitlyTypedLocalVariable()}? explicitly_typed_local_variable_declaration
-    | {this.IsExplicitlyTypedRefLocalVariable()}? explicitly_typed_ref_local_variable_declaration
+    : ref_kind? local_variable_type { this.BeginVariableDeclaration(); }
+      local_variable_declarator
+      (',' local_variable_declarator {this.IsLocalVariableDeclaration()}?)*
     ;
 
-// Source: §13.6.2.2 Implicitly typed local variable declarations
-implicitly_typed_local_variable_declaration
-    : 'var' implicitly_typed_local_variable_declarator
-    | ref_kind 'var' ref_local_variable_declarator
+// CHANGED: unified declarator covering implicit, explicit, and ref initializer cases.
+// Original implicit:   identifier '=' expression
+// Original explicit:   identifier ('=' local_variable_initializer)?
+// Original ref:        identifier '=' 'ref' variable_reference
+// Original:
+//   local_variable_type
+//       : type_
+//       | 'var'
+//       ;
+// Note: 'var' is listed first so SLL resolves the choice at LT(1).
+local_variable_type
+    : 'var'
+    | type_
     ;
 
-implicitly_typed_local_variable_declarator
-    : identifier '=' expression
-    ;
-
-// Source: §13.6.2.3 Explicitly typed local variable declarations
-explicitly_typed_local_variable_declaration
-    : type_ { this.BeginVariableDeclaration(); }
-      explicitly_typed_local_variable_declarators
-    ;
-
-explicitly_typed_local_variable_declarators
-    : explicitly_typed_local_variable_declarator
-      (',' explicitly_typed_local_variable_declarator)*
-    ;
-
-explicitly_typed_local_variable_declarator
+// CHANGED: merged implicitly_typed_local_variable_declarator,
+// explicitly_typed_local_variable_declarator, and ref_local_variable_declarator
+// into one rule. '=' 'ref'? covers plain and ref initializers; initializer
+// is optional (semantic analysis enforces mandatory = for implicit var).
+// Original (explicit): identifier { this.OnVariableDeclarator(); } ('=' local_variable_initializer)?
+local_variable_declarator
     : identifier { this.OnVariableDeclarator(); }
-      ('=' local_variable_initializer)?
+      ('=' 'ref'? local_variable_initializer)?
     ;
 
 local_variable_initializer
@@ -1241,18 +1253,68 @@ local_variable_initializer
     | array_initializer
     ;
 
-// Source: §13.6.2.4 Explicitly typed ref local variable declarations
-explicitly_typed_ref_local_variable_declaration
-    : ref_kind type_ ref_local_variable_declarators
-    ;
+// DELETED: implicitly_typed_local_variable_declaration
+// Merged into local_variable_declaration above.
+// Original:
+//   // Source: §13.6.2.2 Implicitly typed local variable declarations
+//   implicitly_typed_local_variable_declaration
+//       : 'var' implicitly_typed_local_variable_declarator
+//       | ref_kind 'var' ref_local_variable_declarator
+//       ;
 
-ref_local_variable_declarators
-    : ref_local_variable_declarator (',' ref_local_variable_declarator)*
-    ;
+// DELETED: implicitly_typed_local_variable_declarator
+// Merged into local_variable_declarator above.
+// Original:
+//   implicitly_typed_local_variable_declarator
+//       : identifier '=' expression
+//       ;
 
-ref_local_variable_declarator
-    : identifier '=' 'ref' variable_reference
-    ;
+// DELETED: explicitly_typed_local_variable_declaration
+// Merged into local_variable_declaration above.
+// Original:
+//   // Source: §13.6.2.3 Explicitly typed local variable declarations
+//   explicitly_typed_local_variable_declaration
+//       : type_ { this.BeginVariableDeclaration(); }
+//         explicitly_typed_local_variable_declarators
+//       ;
+
+// DELETED: explicitly_typed_local_variable_declarators
+// Merged into local_variable_declaration above.
+// Original:
+//   explicitly_typed_local_variable_declarators
+//       : explicitly_typed_local_variable_declarator
+//         (',' explicitly_typed_local_variable_declarator)*
+//       ;
+
+// DELETED: explicitly_typed_local_variable_declarator
+// Merged into local_variable_declarator above.
+// Original:
+//   explicitly_typed_local_variable_declarator
+//       : identifier { this.OnVariableDeclarator(); }
+//         ('=' local_variable_initializer)?
+//       ;
+
+// DELETED: explicitly_typed_ref_local_variable_declaration
+// Merged into local_variable_declaration above (ref_kind? prefix).
+// Original:
+//   // Source: §13.6.2.4 Explicitly typed ref local variable declarations
+//   explicitly_typed_ref_local_variable_declaration
+//       : ref_kind type_ ref_local_variable_declarators
+//       ;
+
+// DELETED: ref_local_variable_declarators
+// Merged into local_variable_declaration above.
+// Original:
+//   ref_local_variable_declarators
+//       : ref_local_variable_declarator (',' ref_local_variable_declarator)*
+//       ;
+
+// DELETED: ref_local_variable_declarator
+// Merged into local_variable_declarator above ('=' 'ref'? local_variable_initializer).
+// Original:
+//   ref_local_variable_declarator
+//       : identifier '=' 'ref' variable_reference
+//       ;
 
 // Source: §13.6.3 Local constant declarations
 local_constant_declaration
@@ -1503,9 +1565,18 @@ resource_acquisition
     | expression
     ;
 
+// CHANGED: rewritten to use the new unified rules instead of the deleted
+// implicitly_typed_local_variable_declaration / explicitly_typed_local_variable_declaration.
+// Excludes ref_kind prefix (same semantic constraint as before).
+// Original:
+//   non_ref_local_variable_declaration
+//       : implicitly_typed_local_variable_declaration
+//       | explicitly_typed_local_variable_declaration
+//       ;
 non_ref_local_variable_declaration
-    : implicitly_typed_local_variable_declaration
-    | explicitly_typed_local_variable_declaration
+    : local_variable_type { this.BeginVariableDeclaration(); }
+      local_variable_declarator
+      (',' local_variable_declarator {this.IsLocalVariableDeclaration()}?)*
     ;
 
 // Source: §13.14.2 Using declaration

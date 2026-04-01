@@ -279,3 +279,76 @@ A refactoring that mirrors the v6/v7 approach — collapsing the three-way
 predicated decision into a single `local_variable_type local_variable_declarator`
 form — would eliminate the SLL overhead entirely. The cost is losing the
 implicit/explicit distinction in the parse tree for the `var` case.
+
+---
+
+## Comparison with Roslyn's LanguageParser
+
+The Roslyn C# compiler (`LanguageParser.cs`) uses a hand-written recursive-descent
+parser and faces the same logical problem, but sidesteps it entirely through
+architecture.
+
+### How Roslyn decides "is this a local variable declaration?"
+
+`IsPossibleLocalDeclarationStatement` (line 8501) applies a short, bounded
+lookahead:
+
+1. **LT(1) fast path**: `ref`, a declaration modifier (`const`, `static`, …), or
+   a predefined type (`int`, `string`, …) → immediately `true`.
+2. **`using`/`await using`**: immediately `true`.
+3. **`scoped`**: a bounded `IsDefiniteScopedModifier()` scan.
+4. **Identifier-headed statements**: `IsPossibleTypedIdentifierStart(LT(1), LT(2))`:
+   - LT(2) is another identifier → `true` (pattern `TypeName varName`)
+   - LT(2) is `.`, `*`, `?`, `[`, `<`, `::` → `null` (need more)
+   - LT(2) is `(` and LT(1) is `var` → `null` (tuple type or deconstruct)
+   - Otherwise → `false`
+5. **`null` fallback**: `ScanType()` — consumes only the type tokens, then checks
+   that what follows is an identifier. The initializer expression is **never
+   touched**.
+
+For `var query = 1 + … + 1`:
+- LT(1) = `var` (identifier), LT(2) = `query` (identifier).
+- `IsPossibleTypedIdentifierStart` returns `true` immediately.
+- **Total lookahead: 2 tokens.**
+
+### How Roslyn parses the declaration
+
+`ParseLocalDeclaration` (line 10739) calls `ParseReturnType()` (or `ParseType()`),
+which consumes the type tokens — either `var` or an explicit type — and returns
+a `TypeSyntax` node. It then calls `ParseVariableDeclarators` to parse the
+comma-separated declarator list. Both `var` and an explicit type name go through
+the exact same `ParseType()` path; there is no branching on implicit vs explicit.
+
+The binder (not the parser) later decides whether `var` in the resulting
+`VariableDeclarationSyntax` is the implicit-typing keyword or a user-defined type
+name. The parse tree is identical for both cases.
+
+### Handling of `ref` locals in Roslyn
+
+`ParseType()` (line 7579) checks for a leading `ref` (and `ref readonly`) and
+wraps the inner type in a `RefTypeSyntax`. `ParseVariableDeclarator` additionally
+checks for `ref` in the initializer (e.g. `ref int x = ref y`). Both paths are
+token-distinguishable at LT(1) = `ref`.
+
+### Summary: Roslyn vs v7 vs v8-spec
+
+| Concern | Roslyn | v7 grammar | v8-spec grammar |
+|---|---|---|---|
+| Decision cost for `var x = long_expr` | 2 tokens (LT(1)+LT(2)) | 1 token (VAR terminal) | O(expr length) — SLL to accept state |
+| `var`-as-type-name | Deferred to binder | Not handled (parse always treats `var` as keyword) | Handled at parse time via symbol-table predicate |
+| `ref` locals | `ParseType()` sees `ref` at LT(1) | `REF?` prefix on `local_variable_type` | Third predicated alternative (`IsExplicitlyTypedRefLocalVariable`) |
+| Implicit/explicit distinction in tree | None — uniform `VariableDeclaration` | None — uniform `local_variable_type` | Full spec-faithful split |
+| Parse-time symbol table needed | No | No | Yes |
+
+### Architectural conclusion
+
+Both Roslyn and v7 use the same essential strategy: **unify the declaration form**
+and defer the implicit/explicit distinction to a post-parse semantic phase.
+This makes the primary parse decision trivially token-based. The v8-spec grammar's
+insistence on encoding the spec's implicit/explicit split in the parse tree is the
+root cause of the SLL lookahead explosion.
+
+Roslyn's `IsPossibleTypedIdentifierStart` is essentially the hand-written
+equivalent of ANTLR4's SLL prediction for `local_variable_type : 'var' | type_`:
+it sees two identifiers in a row and immediately commits, never touching the
+right-hand side expression.

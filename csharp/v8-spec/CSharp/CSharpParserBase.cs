@@ -530,5 +530,16 @@ return;
         }
         return true;
     }
+
+    // Used to gate comma-separated declarators in local_variable_declaration.
+    // Returns false when the type is 'var' (implicit typing allows only one declarator).
+    public bool IsLocalVariableDeclaration()
+    {
+        var local_var_decl = this.Context as CSharpParser.Local_variable_declarationContext;
+        if (local_var_decl == null) return true;
+        var local_variable_type = local_var_decl.local_variable_type();
+        if (local_variable_type == null) return true;
+        return local_variable_type.GetText() != "var";
+    }
 }
 
