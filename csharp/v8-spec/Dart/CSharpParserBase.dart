@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:antlr4/antlr4.dart';
 import 'CSharpLexer.dart';
+import 'CSharpParser.dart';
 
 abstract class CSharpParserBase extends Parser {
 
@@ -500,5 +501,14 @@ class CSharpSymbolTable {
             'ImmutableArray','ImmutableList','ImmutableDictionary','ImmutableHashSet','Lazy','WeakReference','EventHandler',
             'IEqualityComparer','IComparer','EqualityComparer','Comparer','ConcurrentDictionary','ConcurrentQueue','ConcurrentStack','ConcurrentBag'])
             _knownTypeNames.add(t);
+    }
+
+    // Gates comma-separated declarators: false when type is 'var' (only one declarator allowed).
+    bool IsLocalVariableDeclaration() {
+        final local_var_decl = context;
+        if (local_var_decl is! Local_variable_declarationContext) return true;
+        final local_variable_type = local_var_decl.local_variable_type();
+        if (local_variable_type == null) return true;
+        return local_variable_type.text != "var";
     }
 }

@@ -466,3 +466,15 @@ void CSharpParserBase::ElementAccessSemanticCheck(antlr4::ParserRuleContext *cur
         " cannot be " + lhsPrefix + " " + lhsRuleName +
         " unless it has an initializer");
 }
+
+// Gates comma-separated declarators: false when type is 'var' (only one declarator allowed).
+bool CSharpParserBase::IsLocalVariableDeclaration()
+{
+    auto *ctx = dynamic_cast<CSharpParser::Local_variable_declarationContext *>(getRuleContext());
+    if (ctx == nullptr)
+        return true;
+    auto *local_variable_type = ctx->local_variable_type();
+    if (local_variable_type == nullptr)
+        return true;
+    return local_variable_type->getText() != "var";
+}

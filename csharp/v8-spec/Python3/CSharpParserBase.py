@@ -697,3 +697,17 @@ class CSharpSymbolTable:
             "ConcurrentDictionary","ConcurrentQueue","ConcurrentStack","ConcurrentBag",
         ):
             self._known_type_names.add(t)
+
+    # Gates comma-separated declarators: False when type is 'var' (only one declarator allowed).
+    def IsLocalVariableDeclaration(self):
+        if "." in __name__:
+            from .CSharpParser import CSharpParser
+        else:
+            from CSharpParser import CSharpParser
+        local_var_decl = self._ctx
+        if not isinstance(local_var_decl, CSharpParser.Local_variable_declarationContext):
+            return True
+        local_variable_type = local_var_decl.local_variable_type()
+        if local_variable_type is None:
+            return True
+        return local_variable_type.getText() != "var"

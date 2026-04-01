@@ -625,4 +625,15 @@ class CSharpSymbolTable
             "IEqualityComparer","IComparer","EqualityComparer","Comparer","ConcurrentDictionary","ConcurrentQueue","ConcurrentStack","ConcurrentBag"})
             _knownTypeNames.add(t);
     }
+
+    // Gates comma-separated declarators: false when type is 'var' (only one declarator allowed).
+    protected boolean IsLocalVariableDeclaration()
+    {
+        if (!(this._ctx instanceof CSharpParser.Local_variable_declarationContext)) return true;
+        CSharpParser.Local_variable_declarationContext local_var_decl =
+            (CSharpParser.Local_variable_declarationContext) this._ctx;
+        CSharpParser.Local_variable_typeContext local_variable_type = local_var_decl.local_variable_type();
+        if (local_variable_type == null) return true;
+        return !local_variable_type.getText().equals("var");
+    }
 }

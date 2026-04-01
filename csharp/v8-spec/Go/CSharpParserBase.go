@@ -857,3 +857,18 @@ func (p *CSharpParserBase) IsExplicitlyTypedRefLocalVariable() bool {
 	tok := p.GetTokenStream().LT(1)
 	return tok != nil && tok.GetTokenType() == CSharpLexerKW_REF
 }
+
+// IsLocalVariableDeclaration gates comma-separated declarators.
+// Returns false when the type is 'var' (only one declarator allowed).
+func (p *CSharpParserBase) IsLocalVariableDeclaration() bool {
+	ctx := p.GetParserRuleContext()
+	local_var_decl, ok := ctx.(*Local_variable_declarationContext)
+	if !ok || local_var_decl == nil {
+		return true
+	}
+	local_variable_type := local_var_decl.Local_variable_type()
+	if local_variable_type == nil {
+		return true
+	}
+	return local_variable_type.GetText() != "var"
+}

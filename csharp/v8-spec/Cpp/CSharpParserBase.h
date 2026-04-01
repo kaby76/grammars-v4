@@ -4,6 +4,8 @@
 #include <memory>
 #include <string>
 
+class CSharpParser;
+
 class CSharpParserBase : public antlr4::Parser
 {
 public:
@@ -13,6 +15,7 @@ public:
     CSharpSymbolTable *symTable();
 
     // ── Semantic predicates ────────────────────────────────────────────────
+    bool IsLocalVariableDeclaration();
     bool IsCastExpressionAhead();
     bool IsDeclarationPatternAhead();
     bool IsConstantPatternAhead();

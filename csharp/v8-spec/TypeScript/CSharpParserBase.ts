@@ -1,5 +1,6 @@
 import { Parser, ParserRuleContext, TokenStream, BailErrorStrategy } from "antlr4";
 import CSharpLexer from "./CSharpLexer.js";
+import { Local_variable_declarationContext } from "./CSharpParser.js";
 
 export default abstract class CSharpParserBase extends Parser {
 
@@ -476,5 +477,14 @@ export class CSharpSymbolTable {
             'ImmutableArray','ImmutableList','ImmutableDictionary','ImmutableHashSet','Lazy','WeakReference','EventHandler',
             'IEqualityComparer','IComparer','EqualityComparer','Comparer','ConcurrentDictionary','ConcurrentQueue','ConcurrentStack','ConcurrentBag'])
             this._knownTypeNames.add(t);
+    }
+
+    // Gates comma-separated declarators: false when type is 'var' (only one declarator allowed).
+    protected IsLocalVariableDeclaration(): boolean {
+        const local_var_decl = this._ctx as Local_variable_declarationContext | null;
+        if (local_var_decl == null) return true;
+        const local_variable_type = local_var_decl.local_variable_type();
+        if (local_variable_type == null) return true;
+        return local_variable_type.getText() !== "var";
     }
 }
