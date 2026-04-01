@@ -324,6 +324,15 @@ export abstract class CSharpParserBase extends Parser {
         const tok = this.tokenStream.LT(1);
         return tok !== null && tok.type === CSharpLexer.KW_REF;
     }
+
+    // Gates comma-separated declarators: false when type is 'var' (only one declarator allowed).
+    protected IsLocalVariableDeclaration(): boolean {
+        const local_var_decl = this.context as Local_variable_declarationContext | null;
+        if (local_var_decl == null) return true;
+        const local_variable_type = local_var_decl.local_variable_type();
+        if (local_variable_type == null) return true;
+        return local_variable_type.getText() !== "var";
+    }
 }
 
 // =============================================================================
@@ -479,14 +488,5 @@ export class Ng_CSharpSymbolTable {
             'ImmutableArray','ImmutableList','ImmutableDictionary','ImmutableHashSet','Lazy','WeakReference','EventHandler',
             'IEqualityComparer','IComparer','EqualityComparer','Comparer','ConcurrentDictionary','ConcurrentQueue','ConcurrentStack','ConcurrentBag'])
             this._knownTypeNames.add(t);
-    }
-
-    // Gates comma-separated declarators: false when type is 'var' (only one declarator allowed).
-    protected IsLocalVariableDeclaration(): boolean {
-        const local_var_decl = this.context as Local_variable_declarationContext | null;
-        if (local_var_decl == null) return true;
-        const local_variable_type = local_var_decl.local_variable_type();
-        if (local_variable_type == null) return true;
-        return local_variable_type.getText() !== "var";
     }
 }
