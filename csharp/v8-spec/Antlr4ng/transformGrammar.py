@@ -23,12 +23,6 @@ def transform_grammar(file_path: str) -> None:
                     '@header {import { CSharpLexerBase } from "./CSharpLexerBase.js"}', line)
                 line = re.sub(r"(\/\/ Insert here @header for parser\.)",\
                     '@header {import { CSharpParserBase } from "./CSharpParserBase.js"}', line)
-                # antlr4ng LA() returns number; replace char literals in LookAhead calls
-                line = re.sub(r"(LookAheadIs\w*\([^,]+,\s*)'}'", r'\g<1>125', line)
-                line = re.sub(r"(LookAheadIs\w*\([^,]+,\s*)'{'", r'\g<1>123', line)
-                # Mode constants need CSharpLexer. prefix in TypeScript (static member)
-                line = re.sub(r'\bPeekModeIs\(IRS_CONT\)', 'PeekModeIs(CSharpLexer.IRS_CONT)', line)
-                line = re.sub(r'\bPeekModeIs\(IVS_CONT\)', 'PeekModeIs(CSharpLexer.IVS_CONT)', line)
                 # antlr4ng generated parser uses 'localContext', not '_localctx'
                 line = line.replace('_localctx', 'localContext')
                 output_file.write(line)

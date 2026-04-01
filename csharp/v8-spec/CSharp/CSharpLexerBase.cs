@@ -37,6 +37,11 @@ public abstract class CSharpLexerBase : Lexer
     public bool LookAheadIs(int pos, int value)    => InputStream.LA(pos) == value;
     public bool LookAheadIsNot(int pos, int value) => InputStream.LA(pos) != value;
 
+    public bool LookAheadIsRBrace1()    => InputStream.LA(1) == '}';
+    public bool LookAheadIsNotLBrace2() => InputStream.LA(2) != '{';
+    public bool PeekModeIsIrsCont()     => PeekModeIs(CSharpLexer.IRS_CONT);
+    public bool PeekModeIsIvsCont()     => PeekModeIs(CSharpLexer.IVS_CONT);
+
     // Wrap an interpolated-string fragment token in Unicode tortoise brackets
     // U+3014 〔 and U+3015 〕 so that grun tree output remains parseable.
     public void WrapToken()

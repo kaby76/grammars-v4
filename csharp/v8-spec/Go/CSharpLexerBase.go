@@ -81,6 +81,22 @@ func (l *CSharpLexerBase) LookAheadIsNot(pos int, value int) bool {
 	return l.GetInputStream().(antlr.CharStream).LA(pos) != value
 }
 
+func (l *CSharpLexerBase) LookAheadIsRBrace1() bool {
+	return l.GetInputStream().(antlr.CharStream).LA(1) == '}'
+}
+
+func (l *CSharpLexerBase) LookAheadIsNotLBrace2() bool {
+	return l.GetInputStream().(antlr.CharStream).LA(2) != '{'
+}
+
+func (l *CSharpLexerBase) PeekModeIsIrsCont() bool {
+	return l.PeekModeIs(CSharpLexerIRS_CONT)
+}
+
+func (l *CSharpLexerBase) PeekModeIsIvsCont() bool {
+	return l.PeekModeIs(CSharpLexerIVS_CONT)
+}
+
 func (l *CSharpLexerBase) WrapToken() {
 	text := l.GetText()
 	result := "\u3014" + strings.ReplaceAll(text, "\u3015", "\u3015\u3015") + "\u3015"

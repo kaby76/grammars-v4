@@ -17,6 +17,10 @@ public:
     bool PeekModeIs(int mode) const;
     bool LookAheadIs(int pos, int value);
     bool LookAheadIsNot(int pos, int value);
+    bool LookAheadIsRBrace1() const;
+    bool LookAheadIsNotLBrace2() const;
+    bool PeekModeIsIrsCont() const;
+    bool PeekModeIsIvsCont() const;
     void WrapToken();
 
     std::unique_ptr<antlr4::Token> nextToken() override;

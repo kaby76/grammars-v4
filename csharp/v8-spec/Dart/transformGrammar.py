@@ -1,5 +1,4 @@
 """Transforms the CSharp grammar files for the Dart target."""
-import re
 import shutil
 from glob import glob
 from pathlib import Path
@@ -22,9 +21,6 @@ def transform_grammar(file_path: str) -> None:
     with open(file_path + ".bak", 'r', encoding="utf-8") as input_file:
         with open(file_path, 'w', encoding="utf-8") as output_file:
             for line in input_file:
-                # Dart LA() returns int?; replace char literals in LookAhead calls
-                line = re.sub(r"(LookAheadIs\w*\([^,]+,\s*)'}'", r'\g<1>125', line)
-                line = re.sub(r"(LookAheadIs\w*\([^,]+,\s*)'{'", r'\g<1>123', line)
                 output_file.write(line)
             output_file.flush()
 

@@ -44,6 +44,26 @@ bool CSharpLexerBase::LookAheadIsNot(int pos, int value)
     return charStream_->LA(pos) != value;
 }
 
+bool CSharpLexerBase::LookAheadIsRBrace1() const
+{
+    return charStream_->LA(1) == '}';
+}
+
+bool CSharpLexerBase::LookAheadIsNotLBrace2() const
+{
+    return charStream_->LA(2) != '{';
+}
+
+bool CSharpLexerBase::PeekModeIsIrsCont() const
+{
+    return PeekModeIs(CSharpLexer::IRS_CONT);
+}
+
+bool CSharpLexerBase::PeekModeIsIvsCont() const
+{
+    return PeekModeIs(CSharpLexer::IVS_CONT);
+}
+
 void CSharpLexerBase::WrapToken()
 {
     std::string text = getText();

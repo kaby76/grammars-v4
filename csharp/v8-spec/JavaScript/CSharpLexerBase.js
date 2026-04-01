@@ -47,6 +47,11 @@ export default class CSharpLexerBase extends antlr4.Lexer {
         return this.inputStream.LA(pos) !== value;
     }
 
+    LookAheadIsRBrace1()    { return this.inputStream.LA(1) === 125; }
+    LookAheadIsNotLBrace2() { return this.inputStream.LA(2) !== 123; }
+    PeekModeIsIrsCont()     { return this.PeekModeIs(CSharpLexer.IRS_CONT); }
+    PeekModeIsIvsCont()     { return this.PeekModeIs(CSharpLexer.IVS_CONT); }
+
     WrapToken() {
         this.text = "\u3014" + this.text.replace(/\u3015/g, "\u3015\u3015") + "\u3015";
     }

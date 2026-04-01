@@ -531,7 +531,7 @@ mode DEFAULT_MODE;
 // ║     ;
 // ║ 
 Regular_Interpolation_Format
-    : ':' Interpolated_Regular_String_Element+ { this.LookAheadIs(1, '}') }? { this.PeekModeIs(IRS_CONT) }? { this.WrapToken(); }
+    : ':' Interpolated_Regular_String_Element+ { this.LookAheadIsRBrace1() }? { this.PeekModeIsIrsCont() }? { this.WrapToken(); }
     ;
 
 mode IRS_CONT;
@@ -602,7 +602,7 @@ mode DEFAULT_MODE;
 // ║     ;
 // ║ 
 Verbatim_Interpolation_Format
-    : ':' Interpolated_Verbatim_String_Element+ { this.LookAheadIs(1, '}') }? { this.PeekModeIs(IVS_CONT) }? { this.WrapToken(); }
+    : ':' Interpolated_Verbatim_String_Element+ { this.LookAheadIsRBrace1() }? { this.PeekModeIsIvsCont() }? { this.WrapToken(); }
     ;
 
 mode IVS_CONT;
@@ -653,14 +653,14 @@ mode IRS_CONT;
 
 // ║ Added ║
 Interpolated_Regular_Solitary_LBrace
-    : { this.LookAheadIsNot(2, '{') }? '{' -> type(TK_LBRACE), pushMode(DEFAULT_MODE)
+    : { this.LookAheadIsNotLBrace2() }? '{' -> type(TK_LBRACE), pushMode(DEFAULT_MODE)
     ;
 
 mode IVS_CONT;
 
 // ║ Added ║
 Interpolated_Verbatim_Solitary_LBrace
-    : { this.LookAheadIsNot(2, '{') }? '{' -> type(TK_LBRACE), pushMode(DEFAULT_MODE)
+    : { this.LookAheadIsNotLBrace2() }? '{' -> type(TK_LBRACE), pushMode(DEFAULT_MODE)
     ;
 
 mode DEFAULT_MODE;

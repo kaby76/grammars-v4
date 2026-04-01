@@ -5,9 +5,6 @@ import shutil
 from glob import glob
 from pathlib import Path
 
-# Mode names that need CSharpLexer prefix inside Go target code
-_MODE_RE = re.compile(r'\b(IRS_CONT|IVS_CONT)\b')
-
 
 def _scan_block(line, start):
     """Return (block_text, end_index) for the { ... } block starting at start.
@@ -54,7 +51,6 @@ def _transform_line_lexer(line):
         is_pred = j < n and line[j] == '?'
         if is_pred:
             block = block.replace('this.', 'p.')
-            block = _MODE_RE.sub(lambda m: 'CSharpLexer' + m.group(0), block)
             result.append(block)
             result.append('?')
             i = j + 1

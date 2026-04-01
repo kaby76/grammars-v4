@@ -61,6 +61,11 @@ abstract class CSharpLexerBase extends Lexer {
     bool LookAheadIsNot(int pos, int value) =>
         (inputStream.LA(pos) ?? -1) != value;
 
+    bool LookAheadIsRBrace1()    => (inputStream.LA(1) ?? -1) == 125;
+    bool LookAheadIsNotLBrace2() => (inputStream.LA(2) ?? -1) != 123;
+    bool PeekModeIsIrsCont()     => PeekModeIs(CSharpLexer.IRS_CONT);
+    bool PeekModeIsIvsCont()     => PeekModeIs(CSharpLexer.IVS_CONT);
+
     void WrapToken() {
         text = '\u3014' + text.replaceAll('\u3015', '\u3015\u3015') + '\u3015';
     }

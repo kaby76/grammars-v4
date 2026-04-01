@@ -43,6 +43,26 @@ class CSharpLexerBase(Lexer):
     def LookAheadIsNot(self, pos, value):
         return self.inputStream.LA(pos) != value
 
+    def LookAheadIsRBrace1(self):
+        return self.inputStream.LA(1) == 125
+
+    def LookAheadIsNotLBrace2(self):
+        return self.inputStream.LA(2) != 123
+
+    def PeekModeIsIrsCont(self):
+        if "." in __name__:
+            from .CSharpLexer import CSharpLexer
+        else:
+            from CSharpLexer import CSharpLexer
+        return self.PeekModeIs(CSharpLexer.IRS_CONT)
+
+    def PeekModeIsIvsCont(self):
+        if "." in __name__:
+            from .CSharpLexer import CSharpLexer
+        else:
+            from CSharpLexer import CSharpLexer
+        return self.PeekModeIs(CSharpLexer.IVS_CONT)
+
     def WrapToken(self):
         self.text = "\u3014" + self.text.replace("\u3015", "\u3015\u3015") + "\u3015"
 

@@ -47,6 +47,11 @@ export default abstract class CSharpLexerBase extends Lexer {
         return this._input.LA(pos) !== value;
     }
 
+    LookAheadIsRBrace1(): boolean    { return this._input.LA(1) === 125; }
+    LookAheadIsNotLBrace2(): boolean { return this._input.LA(2) !== 123; }
+    PeekModeIsIrsCont(): boolean     { return this.PeekModeIs(CSharpLexer.IRS_CONT); }
+    PeekModeIsIvsCont(): boolean     { return this.PeekModeIs(CSharpLexer.IVS_CONT); }
+
     WrapToken(): void {
         this.text = "\u3014" + (this.text ?? "").replace(/\u3015/g, "\u3015\u3015") + "\u3015";
     }

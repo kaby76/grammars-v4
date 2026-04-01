@@ -49,6 +49,11 @@ abstract class CSharpLexerBase extends Lexer
         return getInputStream().LA(pos) != value;
     }
 
+    public boolean LookAheadIsRBrace1()    { return getInputStream().LA(1) == '}'; }
+    public boolean LookAheadIsNotLBrace2() { return getInputStream().LA(2) != '{'; }
+    public boolean PeekModeIsIrsCont()     { return PeekModeIs(CSharpLexer.IRS_CONT); }
+    public boolean PeekModeIsIvsCont()     { return PeekModeIs(CSharpLexer.IVS_CONT); }
+
     public void WrapToken()
     {
         String text = getText();
