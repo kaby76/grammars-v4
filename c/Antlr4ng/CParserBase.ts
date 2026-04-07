@@ -382,7 +382,7 @@ export abstract class CParserBase extends Parser {
                         const y = id?.declarator() ?? null;
                         const idToken = this.getDeclarationToken(y);
                         if (idToken !== null && idToken != undefined) {
-                            const text = idToken.text;
+                            const text = idToken.text ?? "";
                             const loc = this.getSourceLocation(idToken);
                             if (is_typedef) {
                                 const symbol = new Symbol();
@@ -418,7 +418,7 @@ export abstract class CParserBase extends Parser {
                 if (dd === null || dd === undefined) continue;
                 if (dd !== null && dd.Identifier() !== null && dd.Identifier() !== undefined) {
                     const idToken = dd.Identifier()!.symbol;
-                    const text = idToken.text;
+                    const text = idToken.text ?? "";
                     const loc = this.getSourceLocation(idToken);
                     const symbol = new Symbol();
                     symbol.name = text;
