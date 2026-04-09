@@ -457,7 +457,7 @@ typeofSpecifierArgument
 typeQualifier
     : 'const'
     | Restrict
-    | Volatile
+    | volatile
     | '_Atomic'
     ;
 
@@ -847,7 +847,11 @@ asmClobbers
 // GNU: asmDefinition
 asmDefinition
     : simpleAsmExpr
-    | Asm '(' toplevelAsmArgument ')'
+    | asm '(' toplevelAsmArgument ')'
+    ;
+
+asm
+    : Asm_1 | Asm_2 | Asm_3
     ;
 
 // GNU: toplevelAsmArgument
@@ -870,9 +874,13 @@ asmOperands
 
 // GNU: asmQualifier
 asmQualifier
-    : Volatile
+    : volatile
     | Inline
     | 'goto'
+    ;
+
+volatile
+    : Volatile_1 | Volatile_2
     ;
 
 // GNU: asmQualifierList
@@ -882,7 +890,7 @@ asmQualifierList
 
 // GNU: asmStatement
 asmStatement
-    : Asm asmQualifierList? '(' asmArgument ')' ';'
+    : asm asmQualifierList? '(' asmArgument ')' ';'
     ;
 
 // GNU: asmStringLiteral
@@ -919,7 +927,7 @@ gnuSingleAttribute
 
 // GNU: simpleAsmExpr
 simpleAsmExpr
-    : Asm '(' asmStringLiteral ')'
+    : asm '(' asmStringLiteral ')'
     ;
 
 // Visual C: vcSpecificModifer
