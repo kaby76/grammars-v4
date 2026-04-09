@@ -26,7 +26,7 @@ export class ErrorListener<T> extends BaseErrorListener<T> {
         line: number,
         column: number,
         msg: string,
-        e: RecognitionException | null
+        e: RecognitionException | undefined
     ): void {
         let fileName = "<unknown>";
         let lineAdjusted = line;

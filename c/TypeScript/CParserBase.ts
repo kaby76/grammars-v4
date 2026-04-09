@@ -360,8 +360,8 @@ export default abstract class CParserBase extends Parser {
 
     public EnterDeclaration(): void {
         if (this.debug) console.log("EnterDeclaration");
-        let context: ParserRuleContext | null = this._ctx;
-        for (; context !== null; context = context.parentCtx) {
+        let context: ParserRuleContext | null | undefined = this._ctx;
+        for (; context != null; context = context.parentCtx) {
             if (context instanceof DeclarationContext) {
                 if ( ! isDeclarationContext(context)) {
                     continue;
