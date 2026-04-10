@@ -30,3 +30,4 @@ In addition, a bit of maneuvering is done to use the C grammar base classes in t
 TrapC grammar. build.sh and build.ps1 are changed to alter the C grammar port files
 for use with TrapC.
 
+*NB: As of April 2026, the project appears to be abandoned.*
