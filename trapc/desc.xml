@@ -6,5 +6,6 @@
     grammar. We need both. -->
     <imports>../c</imports>
     <grammar-name>TrapCParser</grammar-name>
+    <inputs>examples/*.tc</inputs>
     <entry-point>compilationUnit</entry-point>
 </desc>
