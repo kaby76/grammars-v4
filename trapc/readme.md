@@ -23,7 +23,7 @@ Antlr4 overrides in a counterintuitive
 manner: rules that are defined first win. The TrapCParser grammar
 imports first OverridesParser, which first defines `structOrUnion`, `jumpStatement`, `statement`, and `trapStatement`.
 Then it imports CParser from the [c grammar](https://github.com/antlr/grammars-v4/tree/master/c).
-While it too defines most of these paresr rules, they are ignored because OverridesParser defined
+While it too defines most of these parser rules, they are ignored because OverridesParser defined
 them first.
 
 In addition, a bit of maneuvering is done to use the C grammar base classes in the
