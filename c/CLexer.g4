@@ -92,10 +92,16 @@ Countof
     : '_Countof' //GNU
     ;
 
-Asm
+Asm_1
     : 'asm'
-    | '__asm'
-    | '__asm__'
+    ;
+
+Asm_2
+    : '__asm'
+    ;
+
+Asm_3
+    : '__asm__'
     ;
 
 Auto
@@ -274,9 +280,12 @@ Void
     : 'void'
     ;
 
-Volatile
+Volatile_1
     : 'volatile'
-    | '__volatile__'
+    ;
+
+Volatile_2
+    : '__volatile__'
     ;
 
 While

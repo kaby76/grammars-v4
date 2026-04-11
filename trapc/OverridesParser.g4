@@ -1,4 +1,4 @@
-grammar Overrides;
+parser grammar OverridesParser;
 
 structOrUnion
      : 'struct'
