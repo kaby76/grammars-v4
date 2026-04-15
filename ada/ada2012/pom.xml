@@ -42,7 +42,8 @@
 					<entryPoint>compilation</entryPoint>
 					<grammarName>Ada</grammarName>
 					<packageName></packageName>
-					<exampleFiles>examples/</exampleFiles>
+					<exampleFiles>examples/semtest/</exampleFiles>
+					<testFileExtension>.adb</testFileExtension>
 				</configuration>
 				<executions>
 					<execution>
