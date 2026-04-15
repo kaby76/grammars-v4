@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/bash
 #set -x
 #set -e
 
@@ -48,10 +48,14 @@ do
     grammars+=( $g )
 done
 
+failed_grammars=()
 for grammar in ${grammars[@]}
 do
     pushd $grammar
     mvn -B package --file pom.xml
+    if [ $? -ne 0 ]; then
+        failed_grammars+=( $grammar )
+    fi
     popd
 done
 
@@ -59,3 +63,14 @@ done
 root=`git rev-parse --show-toplevel`
 pushd $root
 mvn clean
+status=$?
+
+if [ ${#failed_grammars[@]} -ne 0 ]; then
+    echo "The following grammars failed:"
+    for g in "${failed_grammars[@]}"; do
+        echo "  $g"
+    done
+    exit 1
+fi
+
+exit $status

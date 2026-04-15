@@ -11,9 +11,15 @@
 * *****************************/
 
 
-parser grammar PlantUML;
+parser grammar PlantUMLParser;
 
 options { tokenVocab=PlantUMLLexer; }  // tokens from lexer file
+
+
+// This rule *MUST* exist. Since Antlr 4.6, you *NEED* to augment parser rules
+// with at least one "EOF-terminated start rule" to avoid the "report ok with invalid input"
+// problem. There is no compromise of this.
+entry_: uml EOF;
 
 uml:
     (NEWLINE | COMMENT)* STARTUML (IDENT)? (NEWLINE | class_dclr | enum_dclr | association_dclr | associative_class_dclr | COMMENT)* ENDUML (NEWLINE | COMMENT)*
@@ -58,20 +64,19 @@ enum_dclr:
     ;
 
 association_dclr:
-    left=association_left
-    relation
-    right=association_right
-    association_name?
+    association_left
+    (
+	relation association_right association_name?
+	| association_name // Replaced to allow parsing of functions.
+    )
     ;
 
+// This is a very simple--but likely incorrect--regular expression.
+// The original rule was basically wrong, so I had to replace it with this.
+// I *strongly* suggest using regression testing to make sure the relation
+// operator is correct and does not result in regressions.
 relation:
-    (GT | LT)? DASH (DASH)* (GT | LT)?
-    | (LT)? (DASH)+ STAR
-    | STAR (DASH)+ (GT)?
-    | (LT)? (DASH)+ O
-    | O (DASH)+ (GT)?
-    | (LT_PIPE | CARET) (DASH)+ (GT)?
-    | (LT)? (DASH)+ (CARET | PIPE_GT)
+    LT? (DOUBLE_DOT | DASH | PIPE_GT | LT_PIPE | O | CARET | STAR)* GT?
     ;
 
 association_left:
