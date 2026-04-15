@@ -4,8 +4,9 @@
 
 After fixing `null_coalescing_expression`, `trperf` on `AllInOneNoPreprocessor.cs`
 reported **max-k = 30** on the `expression` rule, at the same position in the
-input. The 30 again reflects the token length of the longest common prefix between
-the two alternatives of `expression` in that file.
+input: `list.Select(c => (c.f1, f3: c.f2)).Where(t => t.f2 == 1);`, line 771, column 21.
+This is the token length of the longest common prefix between
+two alternatives of `expression` in that file.
 
 ### Root cause: shared common prefix across alternatives
 
