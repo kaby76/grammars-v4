@@ -43,6 +43,7 @@
 					<grammarName>Eiffel</grammarName>
 					<packageName></packageName>
 					<exampleFiles>examples/</exampleFiles>
+                                        <testFileExtension>.e</testFileExtension>
 				</configuration>
 				<executions>
 					<execution>
