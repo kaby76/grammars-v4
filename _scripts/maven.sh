@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/bash
 #set -x
 #set -e
 
@@ -63,6 +63,7 @@ done
 root=`git rev-parse --show-toplevel`
 pushd $root
 mvn clean
+status=$?
 
 if [ ${#failed_grammars[@]} -ne 0 ]; then
     echo "The following grammars failed:"
@@ -71,3 +72,5 @@ if [ ${#failed_grammars[@]} -ne 0 ]; then
     done
     exit 1
 fi
+
+exit $status
