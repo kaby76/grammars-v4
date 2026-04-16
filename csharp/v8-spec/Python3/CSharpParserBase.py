@@ -402,7 +402,33 @@ class CSharpParserBase(Parser):
             self._input.seek(saved_index)
 
     def IsConstantPatternAhead(self):
-        return not self.IsDeclarationPatternAhead()
+        if self.IsDeclarationPatternAhead():
+            return False
+        if "." in __name__:
+            from .CSharpLexer import CSharpLexer
+        else:
+            from CSharpLexer import CSharpLexer
+        tok1 = self._input.LT(1)
+        if tok1 is not None and tok1.type == CSharpLexer.TK_LPAREN:
+            depth = 0
+            i = 1
+            while True:
+                tok = self._input.LT(i)
+                i += 1
+                if tok is None or tok.type < 0:
+                    break
+                if tok.type == CSharpLexer.TK_LPAREN:
+                    depth += 1
+                elif tok.type == CSharpLexer.TK_RPAREN:
+                    depth -= 1
+                    if depth == 0:
+                        break
+                elif tok.type == CSharpLexer.TK_COMMA and depth == 1:
+                    return False
+        return True
+
+    def IsPositionalPatternAhead(self):
+        return not self.IsConstantPatternAhead()
 
     def IsImplicitlyTypedLocalVariable(self):
         if "." in __name__:

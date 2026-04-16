@@ -100,8 +100,26 @@ bool CSharpParserBase::IsDeclarationPatternAhead()
 
 bool CSharpParserBase::IsConstantPatternAhead()
 {
-    return !IsDeclarationPatternAhead();
+    if (IsDeclarationPatternAhead()) return false;
+    antlr4::Token *first = _input->LT(1);
+    if (first && static_cast<int>(first->getType()) == CSharpLexer::TK_LPAREN)
+    {
+        int depth = 0, i = 1;
+        while (true)
+        {
+            antlr4::Token *tok = _input->LT(i++);
+            if (!tok) break;
+            int tt = static_cast<int>(tok->getType());
+            if (tt < 0) break;  // EOF
+            if (tt == CSharpLexer::TK_LPAREN) depth++;
+            else if (tt == CSharpLexer::TK_RPAREN) { depth--; if (depth == 0) break; }
+            else if (tt == CSharpLexer::TK_COMMA && depth == 1) return false;
+        }
+    }
+    return true;
 }
+
+bool CSharpParserBase::IsPositionalPatternAhead() { return !IsConstantPatternAhead(); }
 
 bool CSharpParserBase::IsTypeParameterName()
 {
