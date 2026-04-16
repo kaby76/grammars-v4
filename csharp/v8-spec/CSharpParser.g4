@@ -307,7 +307,7 @@ pattern
     : {this.IsDeclarationPatternAhead()}? declaration_pattern
     | {this.IsConstantPatternAhead()}?    constant_pattern
     | var_pattern
-    | positional_pattern
+    | {this.IsPositionalPatternAhead()}? positional_pattern
     | property_pattern
     | discard_pattern
     ;
