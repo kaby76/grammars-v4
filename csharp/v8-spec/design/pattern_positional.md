@@ -99,7 +99,7 @@ pattern
 ## Why the comma-at-depth-1 test is sufficient
 
 The check is conservative: it only returns `false` when there is definitely a
-top-level comma inside the parens.  Cases where `IsConstantPatternAhead` must
+top-level comma inside the parentheses. Cases where `IsConstantPatternAhead` must
 still return `true` for a `(`-headed input:
 
 | Input | Reason |
@@ -110,7 +110,7 @@ still return `true` for a `(`-headed input:
 | `(0, 0)` | Comma at depth 1 → suppressed → routes to `positional_pattern` |
 | `((a, b), c)` | Comma at depth 1 (after inner pair closes) → suppressed |
 
-Nested parens are handled correctly because the scan tracks `depth` and only
+Nested parentheses are handled correctly because the scan tracks `depth` and only
 reacts to commas at `depth == 1`.
 
 ## Decision ordering (revised)

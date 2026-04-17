@@ -19,8 +19,8 @@ A : B 'x' ;   // A calls B as its first token
 B : A 'y' ;   // B calls A as its first token
 ```
 
-When MLR is present the ANTLR4 tool reports an error and refuses to generate a
-parser.  The C# language specification contains exactly this pattern in the
+When MLR is present, the ANTLR4 tool reports an error and refuses to generate a
+parser. The C# language specification contains exactly this pattern in the
 `primary_expression` cluster.
 
 ---
@@ -73,9 +73,9 @@ The grammar preserves the original spec text as a comment block at §12.8.1:
 ## The fix: inline all left-recursive alternatives into `primary_expression`
 
 The solution is to replace every call to a left-recursive sub-rule with its
-production body placed directly inside `primary_expression`.  Because all the
+production body placed directly inside `primary_expression`. Because all the
 alternatives now live in the same rule, ANTLR4's direct-left-recursion rewriter
-handles the self-references correctly.
+can handle the self-references correctly.
 
 The grammar comment records this change:
 
@@ -136,7 +136,7 @@ listener/visitor behaviour.
 
 ## Rules commented out after the refactoring
 
-Five named rules became unreachable after their sole uses were inlined.  Rather
+Five named rules became unreachable after their sole uses were inlined. Rather
 than deleting them, the grammar retains them as commented-out documentation so
 that the spec section reference remains visible.
 
