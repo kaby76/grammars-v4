@@ -448,6 +448,28 @@ return;
                 else if (tok.Type == CSharpLexer.TK_COMMA && depth == 1) return false;
             }
         }
+
+        // An identifier followed by '(' after a type_ is a type-headed positional
+        // pattern like Point(0, 0) or Shape.Circle(x, y).  Invocation expressions
+        // cannot be compile-time constants, so this cannot be a constant_pattern.
+        IToken t1 = ts.LT(1);
+        if (t1 != null && t1.Type == CSharpLexer.Simple_Identifier)
+        {
+            var par = new CSharpParser((ITokenStream)InputStream);
+            par.RemoveErrorListeners();
+            par.ErrorHandler = new BailErrorStrategy();
+            int savedIndex = InputStream.Index;
+            try
+            {
+                par.type_();
+                IToken next = ((CommonTokenStream)InputStream).LT(1);
+                if (next != null && next.Type == CSharpLexer.TK_LPAREN)
+                    return false;  // type_ '(' → positional_pattern
+            }
+            catch { }
+            finally { InputStream.Seek(savedIndex); }
+        }
+
         return true;
     }
 

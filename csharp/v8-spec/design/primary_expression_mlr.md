@@ -144,7 +144,7 @@ that the spec section reference remains visible.
 
 ```antlr
 //null_forgiving_expression
-\    : primary_expression null_forgiving_operator
+//    : primary_expression null_forgiving_operator
 //    ;
 ```
 
@@ -154,7 +154,7 @@ Inlined into `primary_expression` as `| primary_expression null_forgiving_operat
 
 ```antlr
 //invocation_expression
-\    : primary_expression '(' argument_list? ')'
+//    : primary_expression '(' argument_list? ')'
 //    ;
 ```
 
@@ -181,7 +181,7 @@ post-parse validation.
 
 ```antlr
 //element_access
-\    : primary_expression '[' argument_list ']'
+//    : primary_expression '[' argument_list ']'
 //    ;
 ```
 
@@ -192,7 +192,7 @@ The same inlined alternative also replaces `pointer_element_access` (see below).
 
 ```antlr
 //pointer_member_access
-\    : primary_expression '->' identifier type_argument_list?
+//    : primary_expression '->' identifier type_argument_list?
 //    ;
 ```
 
@@ -202,7 +202,7 @@ Inlined into `primary_expression` as `| primary_expression '->' identifier type_
 
 ```antlr
 //pointer_element_access
-\    : primary_expression '[' expression ']'
+//    : primary_expression '[' expression ']'
 //    ;
 ```
 

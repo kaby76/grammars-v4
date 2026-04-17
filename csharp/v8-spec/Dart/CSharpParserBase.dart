@@ -328,6 +328,12 @@ abstract class CSharpParserBase extends Parser {
                 }
             }
         }
+        // Identifier followed immediately by '(' → type-headed positional pattern.
+        final second = ts.LT(2);
+        if (first != null && first.type == CSharpLexer.TOKEN_Simple_Identifier &&
+                second != null && second.type == CSharpLexer.TOKEN_TK_LPAREN) {
+            return false;
+        }
         return true;
     }
 

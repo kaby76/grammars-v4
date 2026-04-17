@@ -116,6 +116,31 @@ bool CSharpParserBase::IsConstantPatternAhead()
             else if (tt == CSharpLexer::TK_COMMA && depth == 1) return false;
         }
     }
+    // Type-headed positional pattern: speculative parse of type_() followed by '('
+    // e.g. Point(0, 0) — LT(1) is an identifier, not '(', so the tuple scan above
+    // was skipped.  A successful type_() parse whose next token is '(' means this
+    // is a positional_pattern, not a constant_pattern.
+    if (first && static_cast<int>(first->getType()) == CSharpLexer::Simple_Identifier)
+    {
+        size_t savedIndex = _input->index();
+        auto *par = new CSharpParser(_input);
+        par->removeErrorListeners();
+        par->setErrorHandler(std::make_shared<antlr4::BailErrorStrategy>());
+        try
+        {
+            par->type_();
+            antlr4::Token *next = _input->LT(1);
+            if (next && static_cast<int>(next->getType()) == CSharpLexer::TK_LPAREN)
+            {
+                _input->seek(savedIndex);
+                delete par;
+                return false;
+            }
+        }
+        catch (...) { }
+        _input->seek(savedIndex);
+        delete par;
+    }
     return true;
 }
 

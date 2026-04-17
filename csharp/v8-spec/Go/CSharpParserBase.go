@@ -830,6 +830,12 @@ func (p *CSharpParserBase) IsConstantPatternAhead() bool {
             }
         }
     }
+    // Identifier followed immediately by '(' → type-headed positional pattern.
+    tok2 := ts.LT(2)
+    if tok1 != nil && tok1.GetTokenType() == CSharpLexerSimple_Identifier &&
+        tok2 != nil && tok2.GetTokenType() == CSharpLexerTK_LPAREN {
+        return false
+    }
     return true
 }
 

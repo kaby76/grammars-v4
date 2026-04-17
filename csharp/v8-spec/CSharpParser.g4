@@ -995,11 +995,11 @@ declaration_expression
 // Source: §12.20 Conditional operator
 conditional_expression
     : null_coalescing_expression (
-	| '?' (
+        '?' (
             expression ':' expression
-	    | 'ref' variable_reference ':' 'ref' variable_reference
-	    )
-	)
+            | 'ref' variable_reference ':' 'ref' variable_reference
+        )
+    )?
     ;
 
 // Source: §12.21.1 General

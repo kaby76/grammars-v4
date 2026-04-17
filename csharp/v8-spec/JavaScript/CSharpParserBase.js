@@ -334,6 +334,9 @@ export default class CSharpParserBase extends antlr4.Parser {
                 else if (tok.type === CSharpLexer.TK_COMMA && depth === 1) return false;
             }
         }
+        // Identifier followed immediately by '(' → type-headed positional pattern.
+        if (this._input.LT(1)?.type === CSharpLexer.Simple_Identifier
+                && this._input.LT(2)?.type === CSharpLexer.TK_LPAREN) return false;
         return true;
     }
 

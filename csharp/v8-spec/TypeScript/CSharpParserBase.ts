@@ -305,6 +305,9 @@ export default abstract class CSharpParserBase extends Parser {
                 else if (tok.type === CSharpLexer.TK_COMMA && depth === 1) return false;
             }
         }
+        // Identifier followed immediately by '(' → type-headed positional pattern.
+        if (ts.LT(1)?.type === CSharpLexer.Simple_Identifier
+                && ts.LT(2)?.type === CSharpLexer.TK_LPAREN) return false;
         return true;
     }
 

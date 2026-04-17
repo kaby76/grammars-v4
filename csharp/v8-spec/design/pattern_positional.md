@@ -136,4 +136,4 @@ Alts 2 and 4 are now mutually exclusive by construction (negation via
 | `("rock", "scissors")` | alt 2 false (comma at depth 1), alt 4 true | `pattern → positional_pattern` |
 | `(0, 0)` | alt 2 false (comma at depth 1), alt 4 true | `pattern → positional_pattern` |
 | `((a, b), c)` | alt 2 false (comma at depth 1), alt 4 true | `pattern → positional_pattern` |
-| `Point(int x, int y)` | alt 1 false, alt 2 true (no paren at LT(1)), alt 4 predicate irrelevant | `pattern → positional_pattern` (type-headed) |
+| `Point(0, 0)` | alt 1 false, alt 2 false (speculative `type_()` followed by `(`), alt 4 true | `pattern → positional_pattern` (type-headed) |
