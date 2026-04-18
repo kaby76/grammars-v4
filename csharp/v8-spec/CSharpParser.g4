@@ -993,6 +993,12 @@ declaration_expression
 //       ;
 
 // Source: §12.20 Conditional operator
+// Original rule before left-factoring:
+//conditional_expression
+//    : null_coalescing_expression
+//    | null_coalescing_expression '?' expression ':' expression
+//    | null_coalescing_expression '?' 'ref' variable_reference ':' 'ref' variable_reference
+//    ;
 conditional_expression
     : null_coalescing_expression (
         '?' (
