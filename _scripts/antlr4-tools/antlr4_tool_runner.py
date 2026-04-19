@@ -23,25 +23,21 @@ def initialize_paths():
 
 def latest_version():
     try:
-        with urlopen("https://central.sonatype.com/solrsearch/select?q=a:antlr4-master+g:org.antlr",
-                     timeout=10) as response:
+        with urlopen("https://api.github.com/repos/antlr/antlr4/releases/latest", timeout=10) as response:
             s = response.read().decode("UTF-8")
-            searchResult = json.loads(s)['response']
-            # searchResult = s.json()['response']
-            antlr_info = searchResult['docs'][0]
-            # print(json.dump(searchResult))
-            latest = antlr_info['latestVersion']
-            return latest
-    except (error.URLError, error.HTTPError, TimeoutError):
-        print("Could not get latest version number, attempting to fall back to latest downloaded version...")
-        version_dirs = list(filter(lambda directory: re.match(r"[0-9]+\.[0-9]+\.[0-9]+", directory), os.listdir(mvn_repo)))
-        version_dirs.sort(reverse=True)
-        if len(version_dirs) == 0:
-            raise FileNotFoundError("Could not find a previously downloaded antlr4 jar")
-        else:
-            latest_version_dir = version_dirs.pop()
-            print(f"Found version '{latest_version_dir}', this version may be out of date")
-            return latest_version_dir
+            tag = json.loads(s)['tag_name']
+            return tag.lstrip('v')
+    except (error.URLError, error.HTTPError, TimeoutError, KeyError):
+        pass
+    print("Could not get latest version number, attempting to fall back to latest downloaded version...")
+    version_dirs = list(filter(lambda directory: re.match(r"[0-9]+\.[0-9]+\.[0-9]+", directory), os.listdir(mvn_repo)))
+    version_dirs.sort(reverse=True)
+    if len(version_dirs) == 0:
+        raise FileNotFoundError("Could not find a previously downloaded antlr4 jar")
+    else:
+        latest_version_dir = version_dirs.pop()
+        print(f"Found version '{latest_version_dir}', this version may be out of date")
+        return latest_version_dir
 
 
 def antlr4_jar(version):
