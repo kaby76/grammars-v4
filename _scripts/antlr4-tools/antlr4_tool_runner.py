@@ -1,8 +1,8 @@
-import argparse
 import os
 import sys
 import re
 import subprocess
+import time
 from shutil import which
 from pathlib import Path
 from urllib.request import urlopen
@@ -30,12 +30,16 @@ def latest_version():
     except (error.URLError, error.HTTPError, TimeoutError, KeyError):
         pass
     print("Could not get latest version number, attempting to fall back to latest downloaded version...")
+    if not os.path.isdir(mvn_repo):
+        raise FileNotFoundError(
+            f"Could not determine the latest ANTLR4 version and no cached versions were found in '{mvn_repo}'"
+        )
     version_dirs = list(filter(lambda directory: re.match(r"[0-9]+\.[0-9]+\.[0-9]+", directory), os.listdir(mvn_repo)))
     version_dirs.sort(reverse=True)
     if len(version_dirs) == 0:
         raise FileNotFoundError("Could not find a previously downloaded antlr4 jar")
     else:
-        latest_version_dir = version_dirs.pop()
+        latest_version_dir = version_dirs[0]
         print(f"Found version '{latest_version_dir}', this version may be out of date")
         return latest_version_dir
 
@@ -58,10 +62,14 @@ def download_antlr4(jar, version):
                 os.makedirs(os.path.join(mvn_repo, version), exist_ok=True)
                 s = response.read()
             break # success.
+        except (error.HTTPError) as e:
+            if e.code == 404:
+                print(f"ANTLR version {version} does not exist.")
+            else:
+                print(f"HTTPError {e.code} on get antlr-{version}-complete.jar")
+            break  # HTTP errors are permanent; no point retrying
         except (error.URLError):
             print(f"URLError on get antlr-{version}-complete.jar")
-        except (error.HTTPError):
-            print(f"HTTPError on get antlr-{version}-complete.jar")
         except (TimeoutError):
             print(f"TimeoutError on get antlr-{version}-complete.jar")
         if attempt < attempts:
@@ -123,21 +131,31 @@ def install_jre_and_antlr(version):
 
 
 def process_args():
-    parser = argparse.ArgumentParser(
-        add_help=False, usage="%(prog)s [-v VERSION] [%(prog)s options]"
-    )
-    # Note, that the space after `-v` is needed, so we don't pick up other arguments beginning with `v`, like `-visitor`
-    parser.add_argument("-v ", dest="version", default=None)
-    args, unparsed_args = parser.parse_known_args()
+    argv = sys.argv[1:]
+    unparsed_args = []
+    version = None
+    i = 0
+    while i < len(argv):
+        arg = argv[i]
+        if arg == "-v":
+            if i + 1 >= len(argv):
+                print("argument -v: expected one argument")
+                sys.exit(1)
+            version = argv[i + 1]
+            i += 2
+            continue
+        unparsed_args.append(arg)
+        i += 1
 
     return unparsed_args, (
-            args.version or os.environ.get("ANTLR4_TOOLS_ANTLR_VERSION") or latest_version()
+            version or os.environ.get("ANTLR4_TOOLS_ANTLR_VERSION") or latest_version()
     )
 
 
 def run_cli(entrypoint):
     initialize_paths()
     args, version = process_args()
+    print(f"Using ANTLR version {version}")
     jar, java = install_jre_and_antlr(version)
     cp = subprocess.run([java, '-cp', jar, entrypoint] + args)
     sys.exit(cp.returncode)
