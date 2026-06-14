@@ -75,7 +75,8 @@ public abstract class CLexerBase extends Lexer {
 
                 process.waitFor();
 
-                Files.writeString(Path.of(outputName), output);
+		Files.writeString(Path.of(outputName), output);
+		System.err.println("YO" + output);
                 return CharStreams.fromString(output);
             } catch (Exception e) {
                 throw new RuntimeException("Failed to run gcc preprocessor", e);
