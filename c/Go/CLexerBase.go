@@ -66,7 +66,7 @@ func runGccAndMakeStream(input antlr.CharStream) antlr.CharStream {
 		cmdArgs = append(cmdArgs, ppOptions...)
 		cmdArgs = append(cmdArgs, sourceName)
 		output, err := exec.Command(gccCmd, cmdArgs...).Output()
-		if err == nil && len(output) > 0 {
+		if len(output) > 0 {
 			_ = os.WriteFile(outputName, output, 0644)
 			return antlr.NewInputStream(string(output))
 		}

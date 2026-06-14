@@ -83,6 +83,8 @@ public abstract class CLexerBase : Lexer
 
                 process.WaitForExit();
 
+pro		
+		
                 File.WriteAllText(output_name, output);
                 return CharStreams.fromString(output);
             }
