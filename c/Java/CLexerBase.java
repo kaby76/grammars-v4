@@ -10,6 +10,8 @@ public abstract class CLexerBase extends Lexer {
         super(runGccAndMakeStream(input));
     }
 
+    public static String yo_java;
+
     public static CharStream runGccAndMakeStream(CharStream input) {
         boolean isWindows = System.getProperty("os.name").toLowerCase().contains("win");
 
@@ -75,7 +77,8 @@ public abstract class CLexerBase extends Lexer {
 
                 process.waitFor();
 
-		System.err.println(output);
+		//System.err.println(output);
+		yo_java = outputName;
 					   
 		Files.writeString(Path.of(outputName), output);
                 return CharStreams.fromString(output);

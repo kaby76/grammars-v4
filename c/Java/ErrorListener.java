@@ -16,6 +16,9 @@ public class ErrorListener extends BaseErrorListener {
     @Override
     public void syntaxError(Recognizer<?, ?> recognizer, Object offendingSymbol, int line,
                             int col, String msg, RecognitionException e) {
+
+	System.err.println("yo java " + CLexerBase.yo_java);
+
         String fileName = "<unknown>";
         int lineAdjusted = line;
 
