@@ -100,6 +100,10 @@ export class SymbolTable {
         this.define(this._createSymbol("_Float32", TypeClassification.TypeSpecifier_));
         this.define(this._createSymbol("_Float64", TypeClassification.TypeSpecifier_));
         this.define(this._createSymbol("_Float128", TypeClassification.TypeSpecifier_));
+        this.define(this._createSymbol("_Float16x", TypeClassification.TypeSpecifier_));
+        this.define(this._createSymbol("_Float32x", TypeClassification.TypeSpecifier_));
+        this.define(this._createSymbol("_Float64x", TypeClassification.TypeSpecifier_));
+        this.define(this._createSymbol("_Float128x", TypeClassification.TypeSpecifier_));
         this.define(this._createSymbol("__v8hf", TypeClassification.TypeSpecifier_));
         this.define(this._createSymbol("__bf16", TypeClassification.TypeSpecifier_));
         this.define(this._createSymbol("__v16bf", TypeClassification.TypeSpecifier_));

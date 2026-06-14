@@ -103,6 +103,10 @@ public class SymbolTable {
         Define(new Symbol() { Name = "_Float32", Classification = new HashSet<TypeClassification>() { TypeClassification.TypeSpecifier_ }, Predefined = true }); // gcc
         Define(new Symbol() { Name = "_Float64", Classification = new HashSet<TypeClassification>() { TypeClassification.TypeSpecifier_ }, Predefined = true }); // gcc
         Define(new Symbol() { Name = "_Float128", Classification = new HashSet<TypeClassification>() { TypeClassification.TypeSpecifier_ }, Predefined = true }); // gcc
+        Define(new Symbol() { Name = "_Float16x", Classification = new HashSet<TypeClassification>() { TypeClassification.TypeSpecifier_ }, Predefined = true }); // gcc
+        Define(new Symbol() { Name = "_Float32x", Classification = new HashSet<TypeClassification>() { TypeClassification.TypeSpecifier_ }, Predefined = true }); // gcc
+        Define(new Symbol() { Name = "_Float64x", Classification = new HashSet<TypeClassification>() { TypeClassification.TypeSpecifier_ }, Predefined = true }); // gcc
+        Define(new Symbol() { Name = "_Float128x", Classification = new HashSet<TypeClassification>() { TypeClassification.TypeSpecifier_ }, Predefined = true }); // gcc
         Define(new Symbol() { Name = "__v8hf", Classification = new HashSet<TypeClassification>() { TypeClassification.TypeSpecifier_ }, Predefined = true }); // gcc
         Define(new Symbol() { Name = "__bf16", Classification = new HashSet<TypeClassification>() { TypeClassification.TypeSpecifier_ }, Predefined = true }); // gcc
         Define(new Symbol() { Name = "__v16bf", Classification = new HashSet<TypeClassification>() { TypeClassification.TypeSpecifier_ }, Predefined = true }); // gcc
