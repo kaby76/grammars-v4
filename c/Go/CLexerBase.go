@@ -65,7 +65,7 @@ func runGccAndMakeStream(input antlr.CharStream) antlr.CharStream {
 		cmdArgs := []string{"-std=c2x", "-E", "-C"}
 		cmdArgs = append(cmdArgs, ppOptions...)
 		cmdArgs = append(cmdArgs, sourceName)
-		output, err := exec.Command(gccCmd, cmdArgs...).Output()
+		output, _ := exec.Command(gccCmd, cmdArgs...).Output()
 		if len(output) > 0 {
 			_ = os.WriteFile(outputName, output, 0644)
 			return antlr.NewInputStream(string(output))
