@@ -35,7 +35,8 @@ public class SymbolTable {
         define(createSymbol("long", TypeClassification.TypeSpecifier_));
         define(createSymbol("float", TypeClassification.TypeSpecifier_));
         define(createSymbol("double", TypeClassification.TypeSpecifier_));
-        define(createSymbol("signed", TypeClassification.TypeSpecifier_));
+	define(createSymbol("signed", TypeClassification.TypeSpecifier_));
+	define(createSymbol("__signed__", TypeClassification.TypeSpecifier_));
         define(createSymbol("unsigned", TypeClassification.TypeSpecifier_));
         define(createSymbol("_BitInt", TypeClassification.TypeSpecifier_));
         define(createSymbol("bool", TypeClassification.TypeSpecifier_));

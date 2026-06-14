@@ -19,9 +19,9 @@ public class ErrorListener extends BaseErrorListener {
     public void syntaxError(Recognizer<?, ?> recognizer, Object offendingSymbol, int line,
                             int col, String msg, RecognitionException e) {
 
+	System.err.println("Error in " + CLexerBase.yo_java);
 	if (! doneit) {
 	    doneit = true;
-	    System.err.println("yo java " + CLexerBase.yo_java);
 	    System.err.println("yo java " + CLexerBase.yo_output);
 	}
 

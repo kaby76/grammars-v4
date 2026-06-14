@@ -36,6 +36,7 @@ class SymbolTable {
     define(_createSymbol("float", TypeClassification.typeSpecifier));
     define(_createSymbol("double", TypeClassification.typeSpecifier));
     define(_createSymbol("signed", TypeClassification.typeSpecifier));
+    define(_createSymbol("__signed__", TypeClassification.typeSpecifier));
     define(_createSymbol("unsigned", TypeClassification.typeSpecifier));
     define(_createSymbol("_BitInt", TypeClassification.typeSpecifier));
     define(_createSymbol("bool", TypeClassification.typeSpecifier));

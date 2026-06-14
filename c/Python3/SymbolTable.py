@@ -36,6 +36,7 @@ class SymbolTable:
         self.define(self._createSymbol("float", TypeClassification.TypeSpecifier_))
         self.define(self._createSymbol("double", TypeClassification.TypeSpecifier_))
         self.define(self._createSymbol("signed", TypeClassification.TypeSpecifier_))
+        self.define(self._createSymbol("__signed__", TypeClassification.TypeSpecifier_))
         self.define(self._createSymbol("unsigned", TypeClassification.TypeSpecifier_))
         self.define(self._createSymbol("_BitInt", TypeClassification.TypeSpecifier_))
         self.define(self._createSymbol("bool", TypeClassification.TypeSpecifier_))

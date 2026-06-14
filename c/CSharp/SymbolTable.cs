@@ -36,7 +36,8 @@ public class SymbolTable {
         Define(new Symbol() { Name = "long", Classification = new HashSet<TypeClassification>() { TypeClassification.TypeSpecifier_ }, Predefined = true });
         Define(new Symbol() { Name = "float", Classification = new HashSet<TypeClassification>() { TypeClassification.TypeSpecifier_ }, Predefined = true });
         Define(new Symbol() { Name = "double", Classification = new HashSet<TypeClassification>() { TypeClassification.TypeSpecifier_ }, Predefined = true });
-        Define(new Symbol() { Name = "signed", Classification = new HashSet<TypeClassification>() { TypeClassification.TypeSpecifier_ }, Predefined = true });
+	Define(new Symbol() { Name = "signed", Classification = new HashSet<TypeClassification>() { TypeClassification.TypeSpecifier_ }, Predefined = true });
+	Define(new Symbol() { Name = "__signed__", Classification = new HashSet<TypeClassification>() { TypeClassification.TypeSpecifier_ }, Predefined = true });
         Define(new Symbol() { Name = "unsigned", Classification = new HashSet<TypeClassification>() { TypeClassification.TypeSpecifier_ }, Predefined = true });
         Define(new Symbol() { Name = "_BitInt", Classification = new HashSet<TypeClassification>() { TypeClassification.TypeSpecifier_ }, Predefined = true });
         Define(new Symbol() { Name = "bool", Classification = new HashSet<TypeClassification>() { TypeClassification.TypeSpecifier_ }, Predefined = true });

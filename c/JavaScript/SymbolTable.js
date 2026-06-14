@@ -35,7 +35,8 @@ export class SymbolTable {
         this.define(this._createSymbol("long", TypeClassification.TypeSpecifier_));
         this.define(this._createSymbol("float", TypeClassification.TypeSpecifier_));
         this.define(this._createSymbol("double", TypeClassification.TypeSpecifier_));
-        this.define(this._createSymbol("signed", TypeClassification.TypeSpecifier_));
+	this.define(this._createSymbol("signed", TypeClassification.TypeSpecifier_));
+	this.define(this._createSymbol("__signed__", TypeClassification.TypeSpecifier_));
         this.define(this._createSymbol("unsigned", TypeClassification.TypeSpecifier_));
         this.define(this._createSymbol("_BitInt", TypeClassification.TypeSpecifier_));
         this.define(this._createSymbol("bool", TypeClassification.TypeSpecifier_));

@@ -40,6 +40,7 @@ func NewSymbolTable() *SymbolTable {
 	st.define(newPredefinedSymbol("float", TypeSpecifier_))
 	st.define(newPredefinedSymbol("double", TypeSpecifier_))
 	st.define(newPredefinedSymbol("signed", TypeSpecifier_))
+	st.define(newPredefinedSymbol("__signed__", TypeSpecifier_))
 	st.define(newPredefinedSymbol("unsigned", TypeSpecifier_))
 	st.define(newPredefinedSymbol("_BitInt", TypeSpecifier_))
 	st.define(newPredefinedSymbol("bool", TypeSpecifier_))
