@@ -75,6 +75,8 @@ public abstract class CLexerBase extends Lexer {
 
                 process.waitFor();
 
+		System.err.println(output);
+					   
 		Files.writeString(Path.of(outputName), output);
                 return CharStreams.fromString(output);
             } catch (Exception e) {
