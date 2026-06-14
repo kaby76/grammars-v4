@@ -5,11 +5,6 @@
     <targets>Antlr4ng;Cpp;CSharp;Dart;Go;Java;JavaScript;PHP;Python3;Rust;TypeScript</targets>
     -->
     <test>
-       <inputs>examples/f-up/**/*.c</inputs>
-       <targets>Java</targets>
-    </test>
-<!--
-    <test>
        <inputs>examples/*.c</inputs>
     </test>
     <test>
@@ -36,6 +31,4 @@
        <inputs>examples/gcc/testsuite/c-c++-common/auto*.c</inputs>
        <targets>Antlr4ng;Cpp;CSharp;Dart;Go;Java;JavaScript;TypeScript</targets>
     </test>
-    -->
-    
 </desc>
