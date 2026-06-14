@@ -13,7 +13,7 @@ public class ErrorListener extends BaseErrorListener {
         _out = out;
     }
 
-    private status boolean doneit = false;
+    private static boolean doneit = false;
     
     @Override
     public void syntaxError(Recognizer<?, ?> recognizer, Object offendingSymbol, int line,
