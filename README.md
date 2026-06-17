@@ -1,6 +1,6 @@
-Last PR merge build: ![CI](https://github.com/antlr/grammars-v4/actions/workflows/main.yml/badge.svg)
-Weekly .jar build: ![Weekly JAR](https://github.com/antlr/grammars-v4/actions/workflows/weekly-jar.yml/badge.svg)
-Weekly dev build: ![Weekly Dev](https://github.com/antlr/grammars-v4/actions/workflows/weekly-dev.yml/badge.svg)
+Last PR merge build: [![CI](https://github.com/antlr/grammars-v4/actions/workflows/main.yml/badge.svg)](https://github.com/antlr/grammars-v4/actions/workflows/main.yml)
+Weekly .jar build: [![Weekly JAR](https://github.com/antlr/grammars-v4/actions/workflows/weekly-jar.yml/badge.svg)](https://github.com/antlr/grammars-v4/actions/workflows/weekly-jar.yml)
+Weekly dev build: [![Weekly Dev](https://github.com/antlr/grammars-v4/actions/workflows/weekly-dev.yml/badge.svg)](https://github.com/antlr/grammars-v4/actions/workflows/weekly-dev.yml)
 
 # Grammars-v4
 
