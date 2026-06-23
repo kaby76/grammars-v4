@@ -62,7 +62,7 @@ jobs:
         JAR=$(ls "$ANTLR4_DEV_DIR"/tool/target/antlr4-*-complete.jar | tail -1)
         echo "ANTLR4_DEV_JAR=$JAR" >> "$GITHUB_ENV"
         dotnet build -c Release "$ANTLR4_DEV_DIR/runtime/CSharp/src"
-        CS_BIN=$(ls -d "$ANTLR4_DEV_DIR"/runtime/CSharp/src/bin/Release/*)
+        CS_BIN="$ANTLR4_DEV_DIR/runtime/CSharp/src/bin/Release/netstandard2.0"
         echo "ANTLR4_CS_BIN=$CS_BIN" >> "$GITHUB_ENV"
     - name: Test all grammars with dev ANTLR4 (Java target)
       shell: bash
