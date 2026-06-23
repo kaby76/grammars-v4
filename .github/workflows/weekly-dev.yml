@@ -64,10 +64,6 @@ jobs:
         dotnet build -c Release "$ANTLR4_DEV_DIR/runtime/CSharp/src"
         CS_BIN="$ANTLR4_DEV_DIR/runtime/CSharp/src/bin/Release/netstandard2.0"
         echo "ANTLR4_CS_BIN=$CS_BIN" >> "$GITHUB_ENV"
-    - name: Test all grammars with dev ANTLR4 (Java target)
-      shell: bash
-      run: |
-        bash _scripts/test.sh -t Java --antlr-version dev
     - name: Upload dev ANTLR4 JAR
       uses: actions/upload-artifact@v7
       with:
@@ -80,3 +76,7 @@ jobs:
         name: antlr4-dev-csharp-runtime-bin
         path: ${{ env.ANTLR4_CS_BIN }}
         retention-days: 90
+    - name: Test all grammars with dev ANTLR4 (Java target)
+      shell: bash
+      run: |
+        bash _scripts/test.sh -t Java --antlr-version dev
