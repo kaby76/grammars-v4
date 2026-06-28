@@ -4,7 +4,7 @@ import { Symbol } from "./Symbol.js";
 import { TypeClassification } from "./TypeClassification.js";
 import CLexer from "./CLexer.js";
 // Note: CParser import removed to break circular dependency (CParser extends CParserBase).
-// RULE_declaration = 27, RULE_functionDefinition = 92 (from CParser.js static fields).
+// RULE_declaration = 27, RULE_declarationSpecifiers = 28, RULE_functionDefinition = 92 (from CParser.js static fields).
 
 function isDeclarationContext(x: any): boolean {
   return x?.ruleIndex === 27;
@@ -142,6 +142,20 @@ export default abstract class CParserBase extends Parser {
         const lt1 = (this._input as CommonTokenStream).LT(1);
         const text = lt1!.text!;
         if (this.debug) console.log("IsDeclarationSpecifier " + lt1);
+        if (lt1!.type === CLexer.Identifier && (this._ctx as any)?.ruleIndex === 28) {
+            const dsCtx = this._ctx as any;
+            const resolvedId = this.resolveWithOutput(lt1);
+            if (resolvedId !== null && !resolvedId.predefined
+                    && !resolvedId.classification.has(TypeClassification.Variable_)
+                    && !resolvedId.classification.has(TypeClassification.Function_)) {
+                const specList = dsCtx.declarationSpecifier_list() ?? null;
+                if (specList) {
+                    for (const spec of specList) {
+                        if (spec.typeSpecifier() != null) return false;
+                    }
+                }
+            }
+        }
         const result = this.IsStorageClassSpecifier()
             || this.IsTypeSpecifier()
             || this.IsTypeQualifier()
@@ -547,7 +561,19 @@ export default abstract class CParserBase extends Parser {
         if (resolved === null) {
             result = true;
         } else if (resolved.classification.has(TypeClassification.TypeQualifier_) || resolved.classification.has(TypeClassification.TypeSpecifier_)) {
-            result = false;
+            if (lt1!.type === CLexer.Identifier && resolved.classification.has(TypeClassification.TypeSpecifier_)) {
+                if ((this._ctx as any)?.ruleIndex === 27) {
+                    const declCtx = this._ctx as any;
+                    const dsCtx = declCtx.declarationSpecifiers();
+                    const specList = dsCtx?.declarationSpecifier_list() ?? null;
+                    if (specList) {
+                        for (const spec of specList) {
+                            if (spec.typeSpecifier() != null) { result = true; break; }
+                        }
+                    }
+                }
+            }
+            if (!result) result = false;
         } else {
             result = true;
         }

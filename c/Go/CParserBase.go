@@ -171,6 +171,20 @@ func (p *CParserBase) IsDeclarationSpecifier() bool {
 	if p.debug {
 		fmt.Println("IsDeclarationSpecifier", lt1)
 	}
+	if lt1.GetTokenType() == CLexerIdentifier {
+		if dsCtx, ok := p.GetParserRuleContext().(*DeclarationSpecifiersContext); ok {
+			resolvedId := p.resolveWithOutput(lt1)
+			if resolvedId != nil && !resolvedId.Predefined &&
+				!resolvedId.Classification[Variable_] &&
+				!resolvedId.Classification[Function_] {
+				for _, spec := range dsCtx.AllDeclarationSpecifier() {
+					if spec.TypeSpecifier() != nil {
+						return false
+					}
+				}
+			}
+		}
+	}
 	result := p.IsStorageClassSpecifier() ||
 		p.IsTypeSpecifier() ||
 		p.IsTypeQualifier() ||
@@ -549,7 +563,22 @@ func (p *CParserBase) IsInitDeclaratorList() bool {
 	} else if resolved.Classification[TypeQualifier_] ||
 		resolved.Classification[TypeSpecifier_] ||
 		lt1.GetText() == "__attribute__" {
-		result = false
+		if lt1.GetTokenType() == CLexerIdentifier && resolved.Classification[TypeSpecifier_] {
+			if declCtx, ok := p.GetParserRuleContext().(*DeclarationContext); ok {
+				dsCtx := declCtx.DeclarationSpecifiers()
+				if dsCtx != nil {
+					for _, spec := range dsCtx.AllDeclarationSpecifier() {
+						if spec.TypeSpecifier() != nil {
+							result = true
+							break
+						}
+					}
+				}
+			}
+		}
+		if !result {
+			result = false
+		}
 	} else {
 		result = true
 	}
