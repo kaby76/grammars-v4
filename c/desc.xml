@@ -6,6 +6,11 @@
     -->
     <test>
        <inputs>examples/*.c</inputs>
+       <targets>Antlr4ng;Cpp;CSharp;Dart;Go;Java;JavaScript;TypeScript</targets>
+    </test>
+    <test>
+       <inputs>examples/tiny/*.c</inputs>
+       <targets>Python3</targets>
     </test>
     <test>
        <inputs>examples/c-testsuite/**/*.c</inputs>
@@ -13,7 +18,7 @@
     </test>
     <test>
        <inputs>examples/writing-a-c-compiler-tests/**/valid/**/*.c</inputs>
-       <targets>Antlr4ng;Cpp;CSharp;Dart;Go;Java;JavaScript;TypeScript</targets>
+       <targets>CSharp;Java</targets>
     </test>
     <test>
        <inputs>examples/sqlite/**/*.c</inputs>
