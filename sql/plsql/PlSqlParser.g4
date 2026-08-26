@@ -7939,6 +7939,7 @@ regular_id
     | COVAR_
     | DATE_FORMAT
     | CSV
+    | CHARACTERSET
     ;
 
 non_reserved_keywords_in_18c
