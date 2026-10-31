@@ -241,21 +241,20 @@ do
         # Gather list of test inputs.
         cmd=`grep '^files2' test.sh`
 
-	echo ====== cmd ======
-	echo $cmd
-	echo =================
-
         eval "$cmd"
+	pushd ..
         files=()
+	pwd
         for f in $files2
         do
             if [ -d "$f" ]; then continue; fi
-                files+=( $f )
+            files+=( $f )
         done
         if [ ${#files[@]} -eq 0 ]
         then
             continue
         fi
+	popd
 
 	# Warmup run (discarded): lets Windows AV pre-scan the executable.
         printf '%s\n' "${files[@]}" | trash parse -p Generated-$target --no-output -x
