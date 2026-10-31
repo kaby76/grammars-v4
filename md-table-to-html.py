@@ -44,9 +44,9 @@ STATIC_HEAD = """\
 <tr><td style="text-align:left"><code>PT</code></td><td style="text-align:left"><strong>Parse time</strong> \u2014 sum of the parse-only time across all input files</td></tr>
 <tr><td style="text-align:left"><code>OT</code></td><td style="text-align:left"><strong>Overhead time</strong> \u2014 <code>TT \u2212 PT</code>; time spent on file I/O, lexer/parser construction, and post-parse work</td></tr>
 <tr><td style="text-align:left"><code>TT</code></td><td style="text-align:left"><strong>Total time</strong> \u2014 overall wall-clock time for the entire run</td></tr>
-<tr><td style="text-align:left"><code>TPS</code></td><td style="text-align:left"><strong>Tokens per second</strong> \u2014 <code>total tokens / PT</code>; pure parse throughput across all files</td></tr>
-<tr><td style="text-align:left"><code>Post-warmup TPS</code></td><td style="text-align:left">TPS computed from files 2\u2026N only, excluding the first (warm-up) run; <code>n.a.</code> if only one file was parsed</td></tr>
-<tr><td style="text-align:left"><code>Post-warmup Speed Up</code></td><td style="text-align:left">Ratio of Post-warmup TPS to first-file TPS, showing the JIT/runtime warm-up benefit; <code>n.a.</code> if only one file was parsed</td></tr>
+<tr><td style="text-align:left"><code>PR</code></td><td style="text-align:left"><strong>Parse rate, tokens per second</strong> \u2014 <code>total tokens / PT</code>; pure parse throughput across all files</td></tr>
+<tr><td style="text-align:left"><code>Post-warmup PR</code></td><td style="text-align:left">PR computed from files 2\u2026N only, excluding the first (warm-up) run; <code>n.a.</code> if only one file was parsed</td></tr>
+<tr><td style="text-align:left"><code>Post-warmup Speed Up</code></td><td style="text-align:left">Ratio of Post-warmup PR to first-file PR, showing the JIT/runtime warm-up benefit; <code>n.a.</code> if only one file was parsed</td></tr>
 <tr><td style="text-align:left"><code>Ambiguities</code></td><td style="text-align:left">Total number of ANTLR ambiguity reports fired across all input files during parsing</td></tr>
 <tr><td style="text-align:left"><code>Actions</code></td><td style="text-align:left">Total number of action code blocks across all <code>.g4</code> files in the grammar</td></tr>
 </tbody>
